@@ -51,13 +51,6 @@ const STATE_VALUE_CLASS: Record<AttributeUsageState, keyof ReturnType<typeof use
   notAnalyzable: 'valueNotAnalyzable'
 }
 
-const STATE_DOT_CLASS: Record<AttributeUsageState, keyof ReturnType<typeof useStyles>['styles']> = {
-  used: 'dotUsed',
-  partiallyUsed: 'dotPartiallyUsed',
-  unused: 'dotUnused',
-  notAnalyzable: 'dotNotAnalyzable'
-}
-
 const HeatmapTile: React.FC<{ attribute: HeatmapAttribute }> = ({ attribute }) => {
   const { styles } = useStyles()
   const { t } = useTranslation()
@@ -126,13 +119,6 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
   }, [heatmapData])
 
   const summary = heatmapData?.usageSummary
-  const legendItems: Array<{ state: AttributeUsageState, label: string }> = [
-    { state: 'used', label: t('attribute-heatmap.state.used') },
-    { state: 'partiallyUsed', label: t('attribute-heatmap.state.partially-used') },
-    { state: 'unused', label: t('attribute-heatmap.state.unused') },
-    { state: 'notAnalyzable', label: t('attribute-heatmap.state.not-analyzable') }
-  ]
-
   return (
     <Content
       padded
@@ -217,17 +203,6 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
               label: t('attribute-heatmap.tab.heatmap'),
               children: (
                 <>
-                  <div className={ styles.legend }>
-                    { legendItems.map(({ state, label }) => (
-                      <Flex key={ state } gap="small" align="center">
-                        <span
-                          className={ `${styles.legendDot} ${styles[STATE_DOT_CLASS[state]]}` }
-                        />
-                        <span>{ label }</span>
-                      </Flex>
-                    )) }
-                  </div>
-
                   { groups.length === 0 && (
                     <Alert type="info" showIcon message={ t('attribute-heatmap.empty') } />
                   ) }
