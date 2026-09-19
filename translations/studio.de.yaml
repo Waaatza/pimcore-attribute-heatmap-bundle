@@ -16,9 +16,17 @@ attribute-heatmap.class-select.placeholder: Datenobjektklasse auswählen
 attribute-heatmap.class-select.option: '{{name}} ({{count}} Objekte)'
 attribute-heatmap.objects: Objekte
 attribute-heatmap.summary.used: 'Verwendet: {{count}}'
+attribute-heatmap.summary.used_one: 'Verwendet: {{count}}'
+attribute-heatmap.summary.used_other: 'Verwendet: {{count}}'
 attribute-heatmap.summary.partially-used: 'Teilweise verwendet: {{count}}'
+attribute-heatmap.summary.partially-used_one: 'Teilweise verwendet: {{count}}'
+attribute-heatmap.summary.partially-used_other: 'Teilweise verwendet: {{count}}'
 attribute-heatmap.summary.unused: 'Nicht verwendet: {{count}}'
+attribute-heatmap.summary.unused_one: 'Nicht verwendet: {{count}}'
+attribute-heatmap.summary.unused_other: 'Nicht verwendet: {{count}}'
 attribute-heatmap.summary.not-analyzable: 'Nicht analysierbar: {{count}}'
+attribute-heatmap.summary.not-analyzable_one: 'Nicht analysierbar: {{count}}'
+attribute-heatmap.summary.not-analyzable_other: 'Nicht analysierbar: {{count}}'
 attribute-heatmap.empty: Für diese Klasse wurden keine Attribute gefunden.
 attribute-heatmap.group-count_one: '{{count}} Attribut'
 attribute-heatmap.group-count_other: '{{count}} Attribute'
