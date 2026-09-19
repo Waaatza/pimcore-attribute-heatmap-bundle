@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\EventSubscriber;
+namespace Watza\AttributeHeatmapBundle\EventSubscriber;
 
-use Pimcore\Bundle\AttributeHeatmapBundle\Util\Constant\PermissionConstants;
+use Watza\AttributeHeatmapBundle\Util\Constant\PermissionConstants;
 use Pimcore\Bundle\StudioBackendBundle\Perspective\Model\ContextPermissionData;
 use Pimcore\Bundle\StudioBackendBundle\Perspective\Service\ContextPermissionsServiceInterface;
 use Pimcore\Bundle\StudioBackendBundle\Perspective\Util\Constant\ContextPermissionGroups;

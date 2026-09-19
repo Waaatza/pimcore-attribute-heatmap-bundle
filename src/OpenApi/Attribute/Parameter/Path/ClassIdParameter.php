@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\OpenApi\Attribute\Parameter\Path;
+namespace Watza\AttributeHeatmapBundle\OpenApi\Attribute\Parameter\Path;
 
 use Attribute;
 use OpenApi\Attributes\PathParameter;

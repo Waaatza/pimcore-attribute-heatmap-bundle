@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\OpenApi\Config;
+namespace Watza\AttributeHeatmapBundle\OpenApi\Config;
 
 use Pimcore\Bundle\StudioBackendBundle\Controller\AbstractApiController;
 

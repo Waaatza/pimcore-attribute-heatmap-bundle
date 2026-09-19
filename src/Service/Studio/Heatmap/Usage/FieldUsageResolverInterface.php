@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage;
+namespace Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage;
 
 interface FieldUsageResolverInterface
 {

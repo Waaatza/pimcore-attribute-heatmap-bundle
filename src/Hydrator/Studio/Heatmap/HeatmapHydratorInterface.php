@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\Hydrator\Studio\Heatmap;
+namespace Watza\AttributeHeatmapBundle\Hydrator\Studio\Heatmap;
 
-use Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap\AttributeHeatmapResult;
-use Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap\ClassListItem;
-use Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap\HeatmapClassInfo;
-use Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Model\AttributeDescriptor;
+use Watza\AttributeHeatmapBundle\Schema\Heatmap\AttributeHeatmapResult;
+use Watza\AttributeHeatmapBundle\Schema\Heatmap\ClassListItem;
+use Watza\AttributeHeatmapBundle\Schema\Heatmap\HeatmapClassInfo;
+use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Model\AttributeDescriptor;
 
 interface HeatmapHydratorInterface
 {

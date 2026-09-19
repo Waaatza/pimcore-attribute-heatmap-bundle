@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap;
+namespace Watza\AttributeHeatmapBundle\Schema\Heatmap;
 
 use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Schema;

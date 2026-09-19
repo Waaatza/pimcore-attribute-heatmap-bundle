@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle;
+namespace Watza\AttributeHeatmapBundle;
 
 use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
 

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Classes;
+namespace Watza\AttributeHeatmapBundle\Service\Studio\Classes;
 
-use Pimcore\Bundle\AttributeHeatmapBundle\Event\Studio\PreResponse\ClassListEvent;
-use Pimcore\Bundle\AttributeHeatmapBundle\Hydrator\Studio\Heatmap\HeatmapHydratorInterface;
-use Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap\ClassItemCollection;
+use Watza\AttributeHeatmapBundle\Event\Studio\PreResponse\ClassListEvent;
+use Watza\AttributeHeatmapBundle\Hydrator\Studio\Heatmap\HeatmapHydratorInterface;
+use Watza\AttributeHeatmapBundle\Schema\Heatmap\ClassItemCollection;
 use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\ClassDefinitionResolverInterface;
 use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\DataObjectResolverInterface;
 use Pimcore\Model\DataObject\ClassDefinition;
