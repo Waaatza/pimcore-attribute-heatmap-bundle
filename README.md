@@ -1,14 +1,14 @@
 # Pimcore Attribute Heatmap Bundle
 
-A [Pimcore Studio](https://pimcore.com/) bundle that analyzes **data object attribute usage** and visualizes it as a **heatmap**. For every attribute of a chosen object class, the bundle iterates over all objects (and variants) and determines how many of them have a value set. The result is shown per attribute, grouped by the containing structure (General, Localizedfields per language, Objectbricks, Fieldcollections, Classificationstore, Blocks).
+A [Pimcore Studio](https://pimcore.com/) bundle that analyzes **data object attribute usage** and visualizes it as a **heatmap**. For every attribute of a chosen object class, the bundle determines how many objects (and variants) have a value set. Counting happens via SQL aggregates on the class data tables, so even large classes are analyzed quickly without loading every object. The result is shown per attribute, grouped by the containing structure (General, Localizedfields per language, Objectbricks, Fieldcollections, Classificationstore, Blocks).
 
 ## Features
 
 - Class picker with live object counts
-- On-demand analysis when opening the widget (batch processing, `200` objects per iteration)
+- On-demand analysis when opening the widget (SQL aggregates on the class data tables, no full object hydration)
 - Per-attribute usage state: `used`, `partially used`, `unused`, `not analyzable`
 - Usage summary tags and a legend
-- Attribute names displayed in a per-group heatmap grid with tooltips
+- Attribute names with field type and usage ratio displayed in a per-group, responsive heatmap grid with tooltips
 - Handles nested structures:
   - Localizedfields (analyzed **per language**, e.g. `name_en`, `name_de`, `name_fr`)
   - Objectbricks and Fieldcollections (name includes the brick/collection type)
@@ -17,6 +17,7 @@ A [Pimcore Studio](https://pimcore.com/) bundle that analyzes **data object attr
 - Extensible via interfaces:
   - `AttributeCollectorInterface` / `ValueProviderInterface` (`Service\Studio\Heatmap\Value`)
   - `FieldUsageResolverInterface` (`Service\Studio\Heatmap\Usage`)
+  - `SqlUsageCounterInterface` (`Service\Studio\Heatmap\Usage`)
   - `HeatmapHydratorInterface` (`Hydrator\Studio\Heatmap`)
 - Pre-response events (`pre_response.attribute_heatmap.class_list` and `pre_response.attribute_heatmap.result`) allow third parties to modify the API responses.
 
@@ -72,8 +73,9 @@ Hover an attribute tile to see the exact `used / total` count.
 
 - The heatmap list is exposed at `GET /pimcore-studio/api/bundle/attribute-heatmap/classes`.
 - The result is exposed at `GET /pimcore-studio/api/bundle/attribute-heatmap/classes/{classId}/heatmap`.
-- Objects are iterated in batches of `200` with inherited values disabled; the batch size can be tuned via the `BATCH_SIZE` constant in `HeatmapService`.
-- A value counts as *used* when it is not null/empty. Field-type specific heuristics live in `FieldUsageResolver` (scalars, arrays, `QuantityValue`/`InputQuantityValue`, consent checkboxes, etc.).
+- Usage counting runs in `SqlUsageCounter`: it builds one `COUNT(...)` aggregate per attribute against the resolved class data tables (`object_store_…`, localized, relations, plus the dedicated brick/fieldcollection/classificationstore/block tables). Field-type specific predicates decide what counts as *used* (e.g. checkboxes check for `'1'`, numerics for `IS NOT NULL`, relation columns for non-empty serialized values).
+- Attributes that cannot be mapped to a table column (e.g. unknown/legacy table layouts) fall back to an object loop in batches of `200` with inherited values disabled; the batch size can be tuned via the `BATCH_SIZE` constant in `HeatmapService`.
+- The object loop reuses the same semantics: a value counts as *used* when it is not null/empty. Field-type specific heuristics live in `FieldUsageResolver` (scalars, arrays, `QuantityValue`/`InputQuantityValue`, consent checkboxes, etc.).
 - Not analyzable field types: `password`, `reverseObjectRelation`.
 
 ## Development
