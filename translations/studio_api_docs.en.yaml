@@ -1,0 +1,7 @@
+bundle_attribute_heatmap_class_list_get_description: Returns a list of all data object classes with the number of objects available for the attribute heatmap analysis.
+bundle_attribute_heatmap_class_list_get_summary: Get data object classes for attribute heatmap
+bundle_attribute_heatmap_class_list_get_success_response: List of classes with object counts
+bundle_attribute_heatmap_analyze_get_description: Analyzes the usage of every attribute for all objects of the given class and returns the heatmap result.
+bundle_attribute_heatmap_analyze_get_summary: Analyze attribute usage for a data object class
+bundle_attribute_heatmap_analyze_get_success_response: Attribute heatmap analysis result
+bundle_tag_attribute_heatmap_description: Attribute heatmap analysis for data object classes

@@ -1,0 +1,33 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Pimcore\Bundle\AttributeHeatmapBundle\:
+        resource: '%pimcore_attribute_heatmap.bundle_path%/src/{Controller,EventSubscriber,Service,Hydrator}'
+        exclude:
+            - '%pimcore_attribute_heatmap.bundle_path%/src/EventSubscriber'
+            - '%pimcore_attribute_heatmap.bundle_path%/src/Service/Studio/Heatmap/Model'
+            - '%pimcore_attribute_heatmap.bundle_path%/src/Service/Studio/Heatmap/Value'
+        tags:
+            - { name: controller.service_arguments }
+
+    Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Classes\ClassServiceInterface:
+        '@Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Classes\ClassService'
+    Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\HeatmapServiceInterface:
+        '@Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\HeatmapService'
+    Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Attribute\AttributeCollectorInterface:
+        '@Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Attribute\AttributeCollector'
+    Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage\FieldUsageResolverInterface:
+        '@Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage\FieldUsageResolver'
+    Pimcore\Bundle\AttributeHeatmapBundle\Hydrator\Studio\Heatmap\HeatmapHydratorInterface:
+        '@Pimcore\Bundle\AttributeHeatmapBundle\Hydrator\Studio\Heatmap\HeatmapHydrator'
+
+    Pimcore\Bundle\AttributeHeatmapBundle\EventSubscriber\StudioContextPermissionsSubscriber:
+        tags:
+            - { name: kernel.event_subscriber }
+
+    Pimcore\Bundle\AttributeHeatmapBundle\Webpack\WebpackEntryPointProvider:
+        tags:
+            - { name: pimcore_studio_ui.webpack_entry_point_provider }

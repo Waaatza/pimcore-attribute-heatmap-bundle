@@ -1,0 +1,6 @@
+attribute_heatmap_studio:
+    resource: '../../src/Controller'
+    type: attribute
+    prefix: '%pimcore_studio_backend.url_prefix%/bundle/attribute-heatmap'
+    options:
+        expose: true

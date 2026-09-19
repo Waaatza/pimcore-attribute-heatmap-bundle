@@ -1,0 +1,75 @@
+<?php
+declare(strict_types=1);
+
+namespace Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Classes;
+
+use Pimcore\Bundle\AttributeHeatmapBundle\Event\Studio\PreResponse\ClassListEvent;
+use Pimcore\Bundle\AttributeHeatmapBundle\Hydrator\Studio\Heatmap\HeatmapHydratorInterface;
+use Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap\ClassItemCollection;
+use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\ClassDefinitionResolverInterface;
+use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\DataObjectResolverInterface;
+use Pimcore\Model\DataObject\ClassDefinition;
+use Throwable;
+use function count;
+
+final readonly class ClassService implements ClassServiceInterface
+{
+    public function __construct(
+        private ClassDefinitionResolverInterface $classDefinitionResolver,
+        private DataObjectResolverInterface $dataObjectResolver,
+        private HeatmapHydratorInterface $hydrator,
+        private \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher,
+    ) {
+    }
+
+    public function getClasses(): ClassItemCollection
+    {
+        $items = [];
+
+        foreach ($this->loadClassDefinitions() as $definition) {
+            $items[] = $this->hydrator->hydrateClassListItem(
+                classId: $definition->getId(),
+                className: $definition->getName(),
+                objectCount: $this->countObjects($definition),
+            );
+        }
+
+        $collection = new ClassItemCollection(
+            items: $items,
+            totalItems: count($items),
+        );
+
+        $this->eventDispatcher->dispatch(
+            new ClassListEvent($collection),
+            ClassListEvent::EVENT_NAME,
+        );
+
+        return $collection;
+    }
+
+    /**
+     * @return ClassDefinition[]
+     */
+    private function loadClassDefinitions(): array
+    {
+        try {
+            $listing = new ClassDefinition\Listing();
+            $listing->setOrderKey('name');
+            $listing->setOrder('ASC');
+
+            return $listing->load();
+        } catch (Throwable) {
+            return [];
+        }
+    }
+
+    private function countObjects(ClassDefinition $definition): int
+    {
+        $listing = $this->dataObjectResolver->getList();
+        $listing->setCondition('classId = ?', [$definition->getId()]);
+        $listing->setUnpublished(true);
+        $listing->setObjectTypes(['object', 'variant']);
+
+        return $listing->count();
+    }
+}
