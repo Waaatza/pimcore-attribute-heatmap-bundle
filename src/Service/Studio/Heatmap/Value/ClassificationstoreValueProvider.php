@@ -26,4 +26,24 @@ final readonly class ClassificationstoreValueProvider implements ValueProviderIn
 
         yield $container->getLocalizedKeyValue($this->groupId, $this->keyId, $this->language ?? 'default');
     }
+
+    public function getContainerFieldName(): string
+    {
+        return $this->containerFieldName;
+    }
+
+    public function getGroupId(): int
+    {
+        return $this->groupId;
+    }
+
+    public function getKeyId(): int
+    {
+        return $this->keyId;
+    }
+
+    public function getLanguage(): ?string
+    {
+        return $this->language;
+    }
 }

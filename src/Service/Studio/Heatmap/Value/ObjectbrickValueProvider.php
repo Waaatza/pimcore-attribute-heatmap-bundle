@@ -32,4 +32,24 @@ final readonly class ObjectbrickValueProvider implements ValueProviderInterface
             yield $item->get($this->fieldName, $this->language);
         }
     }
+
+    public function getContainerFieldName(): string
+    {
+        return $this->containerFieldName;
+    }
+
+    public function getBrickType(): string
+    {
+        return $this->brickType;
+    }
+
+    public function getFieldName(): string
+    {
+        return $this->fieldName;
+    }
+
+    public function getLanguage(): ?string
+    {
+        return $this->language;
+    }
 }

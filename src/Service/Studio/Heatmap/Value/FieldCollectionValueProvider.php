@@ -32,4 +32,24 @@ final readonly class FieldCollectionValueProvider implements ValueProviderInterf
             yield $item->get($this->fieldName, $this->language);
         }
     }
+
+    public function getContainerFieldName(): string
+    {
+        return $this->containerFieldName;
+    }
+
+    public function getCollectionType(): string
+    {
+        return $this->collectionType;
+    }
+
+    public function getFieldName(): string
+    {
+        return $this->fieldName;
+    }
+
+    public function getLanguage(): ?string
+    {
+        return $this->language;
+    }
 }
