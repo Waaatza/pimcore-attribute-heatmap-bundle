@@ -1,0 +1,39 @@
+{
+  "allFiles": [
+    "/bundles/pimcoreattributeheatmap/build/0e6c12f2-a033-4ed0-ac5e-a0d77661ccb5/static/js/main.5bcbd73280.js",
+    "/bundles/pimcoreattributeheatmap/build/0e6c12f2-a033-4ed0-ac5e-a0d77661ccb5/static/js/async/m.5d5719a45c.js",
+    "/bundles/pimcoreattributeheatmap/build/0e6c12f2-a033-4ed0-ac5e-a0d77661ccb5/static/js/remoteEntry.js",
+    "/bundles/pimcoreattributeheatmap/build/0e6c12f2-a033-4ed0-ac5e-a0d77661ccb5/static/js/d.fce010332f.js",
+    "/bundles/pimcoreattributeheatmap/build/0e6c12f2-a033-4ed0-ac5e-a0d77661ccb5/static/js/async/__federation_expose_default_export.56a9a57167.js",
+    "/bundles/pimcoreattributeheatmap/build/0e6c12f2-a033-4ed0-ac5e-a0d77661ccb5/mf-stats.json",
+    "/bundles/pimcoreattributeheatmap/build/0e6c12f2-a033-4ed0-ac5e-a0d77661ccb5/mf-manifest.json",
+    "/bundles/pimcoreattributeheatmap/build/0e6c12f2-a033-4ed0-ac5e-a0d77661ccb5/main.html"
+  ],
+  "entries": {
+    "main": {
+      "html": [
+        "/bundles/pimcoreattributeheatmap/build/0e6c12f2-a033-4ed0-ac5e-a0d77661ccb5/main.html"
+      ],
+      "initial": {
+        "js": [
+          "/bundles/pimcoreattributeheatmap/build/0e6c12f2-a033-4ed0-ac5e-a0d77661ccb5/static/js/d.fce010332f.js",
+          "/bundles/pimcoreattributeheatmap/build/0e6c12f2-a033-4ed0-ac5e-a0d77661ccb5/static/js/main.5bcbd73280.js"
+        ]
+      }
+    },
+    "attribute_heatmap_bundle": {
+      "initial": {
+        "js": [
+          "/bundles/pimcoreattributeheatmap/build/0e6c12f2-a033-4ed0-ac5e-a0d77661ccb5/static/js/remoteEntry.js"
+        ]
+      },
+      "async": {
+        "js": [
+          "/bundles/pimcoreattributeheatmap/build/0e6c12f2-a033-4ed0-ac5e-a0d77661ccb5/static/js/async/m.5d5719a45c.js",
+          "/bundles/pimcoreattributeheatmap/build/0e6c12f2-a033-4ed0-ac5e-a0d77661ccb5/static/js/async/__federation_expose_default_export.56a9a57167.js"
+        ]
+      }
+    }
+  },
+  "integrity": {}
+}

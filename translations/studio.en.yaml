@@ -14,6 +14,7 @@ attribute-heatmap.usage: 'Used: {{used}} of {{total}} objects'
 attribute-heatmap.class-list.error: The list of data object classes could not be loaded.
 attribute-heatmap.class-select.placeholder: Select a data object class
 attribute-heatmap.class-select.option: '{{name}} ({{count}} objects)'
+attribute-heatmap.objects: objects
 attribute-heatmap.summary.used: 'Used: {{count}}'
 attribute-heatmap.summary.partially-used: 'Partially used: {{count}}'
 attribute-heatmap.summary.unused: 'Unused: {{count}}'
@@ -23,3 +24,12 @@ attribute-heatmap.group-count_one: '{{count}} attribute'
 attribute-heatmap.group-count_other: '{{count}} attributes'
 attribute-heatmap.stream.start-error: 'The analysis could not be started (HTTP {{status}}).'
 attribute-heatmap.stream.unexpected-error: Unexpected error while analyzing.
+attribute-heatmap.tab.heatmap: Heatmap
+attribute-heatmap.tab.chart: Chart
+attribute-heatmap.chart.group-filter: Filter by group
+attribute-heatmap.chart.all-groups: All groups
+attribute-heatmap.chart.sort: Sort attributes
+attribute-heatmap.chart.sort.usage-descending: Highest usage first
+attribute-heatmap.chart.sort.usage-ascending: Lowest usage first
+attribute-heatmap.chart.sort.name: Name
+attribute-heatmap.chart.empty: No attributes match the selected group.

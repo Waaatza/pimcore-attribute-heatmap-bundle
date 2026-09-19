@@ -7,6 +7,7 @@ import {
   Progress,
   Select,
   Tag,
+  Tabs,
   Tooltip
 } from '@pimcore/studio-ui-bundle/components'
 import { useTranslation } from '@pimcore/studio-ui-bundle/app'
@@ -16,6 +17,7 @@ import {
   type HeatmapAttribute
 } from '../api/heatmap-api'
 import { useHeatmapStream, type HeatmapPhase } from '../hooks/use-heatmap-stream'
+import { HeatmapChart } from './heatmap-chart'
 import { useStyles } from './heatmap-widget.styles'
 
 const PHASE_LABELS: Record<HeatmapPhase, string> = {
@@ -25,17 +27,6 @@ const PHASE_LABELS: Record<HeatmapPhase, string> = {
   objects: 'attribute-heatmap.phase.objects',
   hydrate: 'attribute-heatmap.phase.hydrate',
   done: 'attribute-heatmap.phase.done'
-}
-
-interface StateMeta {
-  label: string
-}
-
-const STATE_META: Record<AttributeUsageState, StateMeta> = {
-  used: { label: 'attribute-heatmap.state.used' },
-  partiallyUsed: { label: 'attribute-heatmap.state.partially-used' },
-  unused: { label: 'attribute-heatmap.state.unused' },
-  notAnalyzable: { label: 'attribute-heatmap.state.not-analyzable' }
 }
 
 const formatRatio = (ratio: number | null): string => {
@@ -135,13 +126,19 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
   }, [heatmapData])
 
   const summary = heatmapData?.usageSummary
+  const legendItems: Array<{ state: AttributeUsageState, label: string }> = [
+    { state: 'used', label: t('attribute-heatmap.state.used') },
+    { state: 'partiallyUsed', label: t('attribute-heatmap.state.partially-used') },
+    { state: 'unused', label: t('attribute-heatmap.state.unused') },
+    { state: 'notAnalyzable', label: t('attribute-heatmap.state.not-analyzable') }
+  ]
 
   return (
     <Content
       padded
       padding={ { top: 'small', x: 'medium', bottom: 'medium' } }
     >
-      <Header title="Attribute Heatmap" />
+      <Header title={ t('attribute-heatmap.navigation.title') } />
 
       <div className={ styles.section }>
         { classesQuery.isError && (
@@ -158,10 +155,7 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
             placeholder={ t('attribute-heatmap.class-select.placeholder') }
             loading={ classesQuery.isFetching }
             options={ classesQuery.data.items.map((classItem) => ({
-              label: t('attribute-heatmap.class-select.option', {
-                name: classItem.name,
-                count: classItem.objectCount
-              }),
+              label: `${classItem.name} (${classItem.objectCount} ${t('attribute-heatmap.objects')})`,
               value: classItem.id
             })) }
             value={ selectedClassId }
@@ -201,15 +195,6 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
         </Flex>
       ) }
 
-      <div className={ styles.legend }>
-        { Object.entries(STATE_META).map(([state, meta]) => (
-          <Flex key={ state } gap="small" align="center">
-            <span className={ `${styles.legendDot} ${styles[STATE_DOT_CLASS[state as AttributeUsageState]]}` } />
-            <span>{ t(meta.label) }</span>
-          </Flex>
-        )) }
-      </div>
-
       { loading && !heatmapData && (
         <Flex vertical justify="center" align="center" gap="small" className={ styles.section }>
           <Progress
@@ -224,24 +209,54 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
         </Flex>
       ) }
 
-      { heatmapData && groups.length === 0 && (
-        <Alert type="info" showIcon message={ t('attribute-heatmap.empty') } />
-      ) }
+      { heatmapData && (
+        <Tabs
+          items={ [
+            {
+              key: 'heatmap',
+              label: t('attribute-heatmap.tab.heatmap'),
+              children: (
+                <>
+                  <div className={ styles.legend }>
+                    { legendItems.map(({ state, label }) => (
+                      <Flex key={ state } gap="small" align="center">
+                        <span
+                          className={ `${styles.legendDot} ${styles[STATE_DOT_CLASS[state]]}` }
+                        />
+                        <span>{ label }</span>
+                      </Flex>
+                    )) }
+                  </div>
 
-      { groups.map(([group, attributes]) => (
-        <div key={ group } className={ styles.group }>
-          <Header title={ group }>
-            <span className={ styles.groupCount }>
-              { t('attribute-heatmap.group-count', { count: attributes.length }) }
-            </span>
-          </Header>
-          <div className={ styles.tiles }>
-            { attributes.map((attribute) => (
-              <HeatmapTile key={ attribute.name } attribute={ attribute } />
-            )) }
-          </div>
-        </div>
-      )) }
+                  { groups.length === 0 && (
+                    <Alert type="info" showIcon message={ t('attribute-heatmap.empty') } />
+                  ) }
+
+                  { groups.map(([group, attributes]) => (
+                    <div key={ group } className={ styles.group }>
+                      <Header title={ group }>
+                        <span className={ styles.groupCount }>
+                          { t('attribute-heatmap.group-count', { count: attributes.length }) }
+                        </span>
+                      </Header>
+                      <div className={ styles.tiles }>
+                        { attributes.map((attribute) => (
+                          <HeatmapTile key={ attribute.name } attribute={ attribute } />
+                        )) }
+                      </div>
+                    </div>
+                  )) }
+                </>
+              )
+            },
+            {
+              key: 'chart',
+              label: t('attribute-heatmap.tab.chart'),
+              children: <HeatmapChart attributes={ heatmapData.attributes } />
+            }
+          ] }
+        />
+      ) }
     </Content>
   )
 }

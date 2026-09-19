@@ -1,0 +1,35 @@
+attribute-heatmap.navigation.title: Attribut-Heatmap
+perspective-editor.form.main-nav-permission.dataManagement.attributeHeatmap: Datenverwaltung > Attribut-Heatmap
+attribute-heatmap.phase.collect: Attribute werden gesammelt…
+attribute-heatmap.phase.count: Objekte werden gezählt…
+attribute-heatmap.phase.objects: Objektwerte werden analysiert…
+attribute-heatmap.phase.hydrate: Ergebnis wird vorbereitet…
+attribute-heatmap.phase.done: Fertig
+attribute-heatmap.state.used: Verwendet
+attribute-heatmap.state.partially-used: Teilweise verwendet
+attribute-heatmap.state.unused: Nicht verwendet
+attribute-heatmap.state.not-analyzable: Nicht analysierbar
+attribute-heatmap.type: 'Typ: {{type}}'
+attribute-heatmap.usage: 'Verwendet: {{used}} von {{total}} Objekten'
+attribute-heatmap.class-list.error: Die Liste der Datenobjektklassen konnte nicht geladen werden.
+attribute-heatmap.class-select.placeholder: Datenobjektklasse auswählen
+attribute-heatmap.class-select.option: '{{name}} ({{count}} Objekte)'
+attribute-heatmap.objects: Objekte
+attribute-heatmap.summary.used: 'Verwendet: {{count}}'
+attribute-heatmap.summary.partially-used: 'Teilweise verwendet: {{count}}'
+attribute-heatmap.summary.unused: 'Nicht verwendet: {{count}}'
+attribute-heatmap.summary.not-analyzable: 'Nicht analysierbar: {{count}}'
+attribute-heatmap.empty: Für diese Klasse wurden keine Attribute gefunden.
+attribute-heatmap.group-count_one: '{{count}} Attribut'
+attribute-heatmap.group-count_other: '{{count}} Attribute'
+attribute-heatmap.stream.start-error: 'Die Analyse konnte nicht gestartet werden (HTTP {{status}}).'
+attribute-heatmap.stream.unexpected-error: Unerwarteter Fehler während der Analyse.
+attribute-heatmap.tab.heatmap: Heatmap
+attribute-heatmap.tab.chart: Diagramm
+attribute-heatmap.chart.group-filter: Nach Gruppe filtern
+attribute-heatmap.chart.all-groups: Alle Gruppen
+attribute-heatmap.chart.sort: Attribute sortieren
+attribute-heatmap.chart.sort.usage-descending: Höchste Nutzung zuerst
+attribute-heatmap.chart.sort.usage-ascending: Niedrigste Nutzung zuerst
+attribute-heatmap.chart.sort.name: Name
+attribute-heatmap.chart.empty: Keine Attribute entsprechen der ausgewählten Gruppe.
