@@ -1,6 +1,6 @@
 {
   "name": "watza/attribute-heatmap-bundle",
-  "license": "POCL",
+  "license": "MIT",
   "type": "pimcore-bundle",
   "description": "Pimcore Studio bundle that visualizes the usage of data object attributes as a heatmap",
   "homepage": "https://github.com/Waaatza/pimcore-attribute-heatmap-bundle",

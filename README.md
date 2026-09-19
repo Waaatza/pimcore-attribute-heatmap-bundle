@@ -91,4 +91,4 @@ The bundle exposes its UI entrypoint via `WebpackEntryPointProvider` and registe
 
 ## License
 
-This bundle is published under the **Pimcore Open Core License (POCL)** – see [LICENSE.md](LICENSE.md).
+This bundle is published under the **MIT License** – see [LICENSE.md](LICENSE.md).
