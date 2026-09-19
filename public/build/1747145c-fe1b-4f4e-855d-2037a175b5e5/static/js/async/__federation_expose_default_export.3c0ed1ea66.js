@@ -34,9 +34,9 @@
   `,tile:a`
     display: flex;
     flex-direction: column;
-    gap: ${t.marginXXS}px;
+    gap: ${t.marginXS}px;
     min-width: 0;
-    padding: ${t.paddingXS}px ${t.paddingSM}px;
+    padding: ${t.paddingSM}px ${t.paddingMD}px;
     border-radius: ${t.borderRadiusLG}px;
     border: 1px solid transparent;
     background: ${t.colorBgContainer};

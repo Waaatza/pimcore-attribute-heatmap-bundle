@@ -47,9 +47,9 @@ export const useStyles = createStyles(({ token, css }) => ({
   tile: css`
     display: flex;
     flex-direction: column;
-    gap: ${token.marginXXS}px;
+    gap: ${token.marginXS}px;
     min-width: 0;
-    padding: ${token.paddingXS}px ${token.paddingSM}px;
+    padding: ${token.paddingSM}px ${token.paddingMD}px;
     border-radius: ${token.borderRadiusLG}px;
     border: 1px solid transparent;
     background: ${token.colorBgContainer};
