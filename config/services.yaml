@@ -9,6 +9,7 @@ services:
         exclude:
             - '%pimcore_attribute_heatmap.bundle_path%/src/EventSubscriber'
             - '%pimcore_attribute_heatmap.bundle_path%/src/Service/Studio/Heatmap/Model'
+            - '%pimcore_attribute_heatmap.bundle_path%/src/Service/Studio/Heatmap/Usage/SqlUsageResult.php'
             - '%pimcore_attribute_heatmap.bundle_path%/src/Service/Studio/Heatmap/Value'
         tags:
             - { name: controller.service_arguments }
@@ -21,6 +22,8 @@ services:
         '@Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Attribute\AttributeCollector'
     Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage\FieldUsageResolverInterface:
         '@Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage\FieldUsageResolver'
+    Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage\SqlUsageCounterInterface:
+        '@Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage\SqlUsageCounter'
     Watza\AttributeHeatmapBundle\Hydrator\Studio\Heatmap\HeatmapHydratorInterface:
         '@Watza\AttributeHeatmapBundle\Hydrator\Studio\Heatmap\HeatmapHydrator'
 
