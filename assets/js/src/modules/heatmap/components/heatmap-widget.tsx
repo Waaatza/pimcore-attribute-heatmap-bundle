@@ -4,8 +4,8 @@ import {
   Content,
   Flex,
   Header,
+  Progress,
   Select,
-  Spin,
   Tag,
   Tooltip
 } from '@pimcore/studio-ui-bundle/components'
@@ -87,12 +87,33 @@ const HeatmapTile: React.FC<{ attribute: HeatmapAttribute }> = ({ attribute }) =
 
 export const HeatmapWidget: React.FC = (): React.JSX.Element => {
   const [selectedClassId, setSelectedClassId] = useState<string | null>(null)
+  const [progress, setProgress] = useState(0)
 
   const classesQuery = useAttributeHeatmapGetClassesQuery()
   const heatmapQuery = useAttributeHeatmapAnalyzeQuery(
     selectedClassId ? { classId: selectedClassId } : { classId: '' },
     { skip: selectedClassId === null }
   )
+
+  const loading = classesQuery.isFetching || heatmapQuery.isFetching
+
+  useEffect(() => {
+    if (!loading) {
+      setProgress(0)
+
+      return
+    }
+
+    let value = 10
+    setProgress(value)
+
+    const id = setInterval(() => {
+      value = Math.min(value + Math.random() * 12, 92)
+      setProgress(value)
+    }, 350)
+
+    return () => clearInterval(id)
+  }, [loading])
 
   useEffect(() => {
     if (selectedClassId === null && classesQuery.data?.items.length) {
@@ -118,7 +139,6 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
     return [...grouped.entries()]
   }, [heatmapQuery.data])
 
-  const loading = classesQuery.isFetching || heatmapQuery.isFetching
   const summary = heatmapQuery.data?.usageSummary
 
   return (
@@ -168,7 +188,14 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
             <Tag color="red">{ `Unused: ${summary.unused}` }</Tag>
             <Tag>{ `Not analyzable: ${summary.notAnalyzable}` }</Tag>
           </Flex>
-          { loading && <Spin size="small" /> }
+          { loading && (
+            <Progress
+              percent={ progress }
+              status="active"
+              showInfo={ false }
+              style={ { width: 120 } }
+            />
+          ) }
         </Flex>
       ) }
 
@@ -197,9 +224,17 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
         )) }
       </div>
 
-      { heatmapQuery.isLoading && !heatmapQuery.data && (
-        <Flex justify="center" align="center" style={ { padding: '3rem 0' } }>
-          <Spin />
+      { loading && !heatmapQuery.data && (
+        <Flex vertical justify="center" align="center" gap="small" style={ { padding: '3rem 0' } }>
+          <Progress
+            percent={ progress }
+            status="active"
+            showInfo={ false }
+            style={ { width: 360, maxWidth: '100%' } }
+          />
+          <span style={ { fontSize: 13, color: 'rgba(0, 0, 0, 0.45)' } }>
+            Analysing attributes…
+          </span>
         </Flex>
       ) }
 
