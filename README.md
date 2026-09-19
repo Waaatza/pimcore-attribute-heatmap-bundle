@@ -20,13 +20,15 @@ A [Pimcore Studio](https://pimcore.com/) bundle that analyzes **data object attr
   - `HeatmapHydratorInterface` (`Hydrator\Studio\Heatmap`)
 - Pre-response events (`pre_response.attribute_heatmap.class_list` and `pre_response.attribute_heatmap.result`) allow third parties to modify the API responses.
 
+This branch targets the **Pimcore 2025.4 release train** (`pimcore/pimcore` `^12.3.9`, Studio `^2025.4`). For the current Pimcore 2026 release train, see the `main` branch.
+
 ## Requirements
 
 - PHP `>= 8.2`
-- Pimcore `^11.0 || ^12.0 || ^2026.1`
-- Pimcore Studio UI `^2026.2`
-- `pimcore/studio-backend-bundle` `^2026.2`
-- `pimcore/static-resolver-bundle` `^2026.2`
+- Pimcore `^12.3.9` (2025.4)
+- Pimcore Studio UI `^2025.4`
+- `pimcore/studio-backend-bundle` `^2025.4`
+- `pimcore/static-resolver-bundle` `^3.6.2`
 
 ## Installation
 

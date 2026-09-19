@@ -8,7 +8,7 @@
     "build": "rsbuild build"
   },
   "dependencies": {
-    "@pimcore/studio-ui-bundle": "^2026.2.1",
+    "@pimcore/studio-ui-bundle": "^2025.4",
     "react": "18.3.x",
     "react-dom": "18.3.x"
   },
