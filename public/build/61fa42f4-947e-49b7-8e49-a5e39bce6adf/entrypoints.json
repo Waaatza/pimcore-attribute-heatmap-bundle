@@ -1,0 +1,24 @@
+{
+  "entrypoints": {
+    "main": {
+      "js": [
+        "/bundles/pimcoreattributeheatmap/build/61fa42f4-947e-49b7-8e49-a5e39bce6adf/static/js/0.e86969c9da.js",
+        "/bundles/pimcoreattributeheatmap/build/61fa42f4-947e-49b7-8e49-a5e39bce6adf/static/js/main.659a9fb34d.js"
+      ],
+      "css": []
+    },
+    "attribute_heatmap_bundle": {
+      "js": [
+        "/bundles/pimcoreattributeheatmap/build/61fa42f4-947e-49b7-8e49-a5e39bce6adf/static/js/async/__federation_expose_default_export.92efe1210d.js",
+        "/bundles/pimcoreattributeheatmap/build/61fa42f4-947e-49b7-8e49-a5e39bce6adf/static/js/remoteEntry.js"
+      ],
+      "css": []
+    },
+    "exposeRemote": {
+      "js": [
+        "/bundles/pimcoreattributeheatmap/build/61fa42f4-947e-49b7-8e49-a5e39bce6adf/exposeRemote.js"
+      ],
+      "css": []
+    }
+  }
+}
