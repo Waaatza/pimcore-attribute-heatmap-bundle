@@ -77,11 +77,16 @@ const HeatmapTile: React.FC<{ attribute: HeatmapAttribute }> = ({ attribute }) =
   return (
     <Tooltip title={ tooltipTitle }>
       <div className={ `${styles.tile} ${styles[STATE_TILE_CLASS[attribute.usageState]]}` }>
+        <div className={ styles.tileHeader }>
+          <span className={ styles.tileType }>
+            { attribute.fieldType }
+          </span>
+          <span className={ `${styles.tileValue} ${styles[STATE_VALUE_CLASS[attribute.usageState]]}` }>
+            { formatRatio(attribute.usageRatio) }
+          </span>
+        </div>
         <div className={ styles.tileTitle }>
           { attribute.title }
-        </div>
-        <div className={ `${styles.tileValue} ${styles[STATE_VALUE_CLASS[attribute.usageState]]}` }>
-          { formatRatio(attribute.usageRatio) }
         </div>
       </div>
     </Tooltip>

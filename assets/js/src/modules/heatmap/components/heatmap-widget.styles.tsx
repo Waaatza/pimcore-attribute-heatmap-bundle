@@ -39,32 +39,47 @@ export const useStyles = createStyles(({ token, css }) => ({
     color: ${token.colorTextTertiary};
   `,
   tiles: css`
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: ${token.marginXS}px;
     margin-top: ${token.marginXS}px;
   `,
   tile: css`
-    width: 150px;
-    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: ${token.marginXXS}px;
+    min-width: 0;
     padding: ${token.paddingXS}px ${token.paddingSM}px;
     border-radius: ${token.borderRadiusLG}px;
     border: 1px solid transparent;
     background: ${token.colorBgContainer};
     box-sizing: border-box;
   `,
-  tileTitle: css`
+  tileHeader: css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: ${token.marginXXS}px;
+  `,
+  tileType: css`
     font-size: ${token.fontSizeSM}px;
-    line-height: ${token.lineHeightSM}px;
-    color: ${token.colorTextSecondary};
+    color: ${token.colorTextTertiary};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   `,
+  tileTitle: css`
+    font-size: ${token.fontSize}px;
+    line-height: ${token.lineHeight}px;
+    color: ${token.colorText};
+    font-weight: 500;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  `,
   tileValue: css`
     font-size: ${token.fontSizeLG}px;
     font-weight: ${token.fontWeightStrong};
-    margin-top: ${token.marginXXS}px;
+    flex-shrink: 0;
   `,
   tileUsed: css`
     border-color: ${token.colorSuccess};
