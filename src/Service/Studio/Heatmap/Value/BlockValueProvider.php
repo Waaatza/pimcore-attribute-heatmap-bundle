@@ -40,4 +40,14 @@ final readonly class BlockValueProvider implements ValueProviderInterface
             }
         }
     }
+
+    public function getContainerFieldName(): string
+    {
+        return $this->containerFieldName;
+    }
+
+    public function getFieldName(): string
+    {
+        return $this->fieldName;
+    }
 }
