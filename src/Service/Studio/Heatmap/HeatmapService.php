@@ -9,9 +9,11 @@ use Watza\AttributeHeatmapBundle\Schema\Heatmap\AttributeHeatmapResult;
 use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Attribute\AttributeCollectorInterface;
 use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Model\AttributeDescriptor;
 use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage\FieldUsageResolverInterface;
+use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage\SqlUsageCounterInterface;
 use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\ClassDefinitionResolverInterface;
 use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\DataObjectResolverInterface;
 use Pimcore\Bundle\StudioBackendBundle\Exception\Api\NotFoundException;
+use Pimcore\Model\DataObject\ClassDefinition;
 use Pimcore\Model\DataObject\Concrete;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -24,6 +26,7 @@ final readonly class HeatmapService implements HeatmapServiceInterface
         private DataObjectResolverInterface $dataObjectResolver,
         private AttributeCollectorInterface $attributeCollector,
         private FieldUsageResolverInterface $fieldUsageResolver,
+        private SqlUsageCounterInterface $sqlUsageCounter,
         private HeatmapHydratorInterface $heatmapHydrator,
         private EventDispatcherInterface $eventDispatcher,
     ) {
@@ -40,7 +43,7 @@ final readonly class HeatmapService implements HeatmapServiceInterface
         $descriptors = $this->attributeCollector->collect($definition);
         $totalCount = $this->countObjects($classId);
 
-        $usedCounts = $this->collectUsageCounts($classId, $descriptors, $totalCount);
+        $usedCounts = $this->collectUsageCounts($classId, $definition, $descriptors, $totalCount);
 
         $classInfo = $this->heatmapHydrator->hydrateClassInfo(
             classId: $classId,
@@ -78,13 +81,26 @@ final readonly class HeatmapService implements HeatmapServiceInterface
      *
      * @return array<int, int>
      */
-    private function collectUsageCounts(string $classId, array $descriptors, int $totalCount): array
-    {
-        $usedCounts = array_fill(0, count($descriptors), 0);
-
+    private function collectUsageCounts(
+        string $classId,
+        ClassDefinition $definition,
+        array $descriptors,
+        int $totalCount,
+    ): array {
         if ($totalCount === 0) {
+            return array_fill(0, count($descriptors), 0);
+        }
+
+        $usageResult = $this->sqlUsageCounter->count($classId, $definition, $descriptors);
+        $usedCounts = $usageResult->getUsedCounts();
+
+        $remainingIndexes = $usageResult->getRemainingIndexes();
+
+        if ($remainingIndexes === []) {
             return $usedCounts;
         }
+
+        $pending = array_fill_keys($remainingIndexes, true);
 
         $previousInheritedValues = $this->dataObjectResolver->getGetInheritedValues();
         $this->dataObjectResolver->setGetInheritedValues(false);
@@ -112,6 +128,10 @@ final readonly class HeatmapService implements HeatmapServiceInterface
                     }
 
                     foreach ($descriptors as $index => $descriptor) {
+                        if (!isset($pending[$index])) {
+                            continue;
+                        }
+
                         if (!$descriptor->getAnalyzable() || $descriptor->getValueProvider() === null) {
                             continue;
                         }
