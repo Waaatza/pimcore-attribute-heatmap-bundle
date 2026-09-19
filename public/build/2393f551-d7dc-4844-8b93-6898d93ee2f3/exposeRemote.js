@@ -7,7 +7,7 @@
         window.alternativePluginExportPaths = {}
       }
 
-      window.pluginRemotes.attribute_heatmap_bundle = "/bundles/pimcoreattributeheatmap/build/66a2de5a-d181-4e75-a286-e912b0451fbf/static/js/remoteEntry.js"
+      window.pluginRemotes.attribute_heatmap_bundle = "/bundles/pimcoreattributeheatmap/build/2393f551-d7dc-4844-8b93-6898d93ee2f3/static/js/remoteEntry.js"
 
       
     

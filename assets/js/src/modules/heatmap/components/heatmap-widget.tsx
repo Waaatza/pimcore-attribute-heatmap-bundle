@@ -15,6 +15,7 @@ import {
   type HeatmapAttribute
 } from '../api/heatmap-api'
 import { useHeatmapStream, type HeatmapPhase } from '../hooks/use-heatmap-stream'
+import { useStyles } from './heatmap-widget.styles'
 
 const PHASE_LABELS: Record<HeatmapPhase, string> = {
   idle: '',
@@ -26,16 +27,14 @@ const PHASE_LABELS: Record<HeatmapPhase, string> = {
 }
 
 interface StateMeta {
-  color: string
-  background: string
   label: string
 }
 
 const STATE_META: Record<AttributeUsageState, StateMeta> = {
-  used: { color: '#15803d', background: '#f0fdf4', label: 'Used' },
-  partiallyUsed: { color: '#b45309', background: '#fffbeb', label: 'Partially used' },
-  unused: { color: '#b91c1c', background: '#fef2f2', label: 'Unused' },
-  notAnalyzable: { color: '#4b5563', background: '#f3f4f6', label: 'Not analyzable' }
+  used: { label: 'Used' },
+  partiallyUsed: { label: 'Partially used' },
+  unused: { label: 'Unused' },
+  notAnalyzable: { label: 'Not analyzable' }
 }
 
 const formatRatio = (ratio: number | null): string => {
@@ -46,8 +45,29 @@ const formatRatio = (ratio: number | null): string => {
   return `${Math.round(ratio * 100)}%`
 }
 
+const STATE_TILE_CLASS: Record<AttributeUsageState, keyof ReturnType<typeof useStyles>['styles']> = {
+  used: 'tileUsed',
+  partiallyUsed: 'tilePartiallyUsed',
+  unused: 'tileUnused',
+  notAnalyzable: 'tileNotAnalyzable'
+}
+
+const STATE_VALUE_CLASS: Record<AttributeUsageState, keyof ReturnType<typeof useStyles>['styles']> = {
+  used: 'valueUsed',
+  partiallyUsed: 'valuePartiallyUsed',
+  unused: 'valueUnused',
+  notAnalyzable: 'valueNotAnalyzable'
+}
+
+const STATE_DOT_CLASS: Record<AttributeUsageState, keyof ReturnType<typeof useStyles>['styles']> = {
+  used: 'dotUsed',
+  partiallyUsed: 'dotPartiallyUsed',
+  unused: 'dotUnused',
+  notAnalyzable: 'dotNotAnalyzable'
+}
+
 const HeatmapTile: React.FC<{ attribute: HeatmapAttribute }> = ({ attribute }) => {
-  const meta = STATE_META[attribute.usageState]
+  const { styles } = useStyles()
   const tooltipTitle = [
     attribute.name,
     `Type: ${attribute.fieldType}`,
@@ -56,37 +76,11 @@ const HeatmapTile: React.FC<{ attribute: HeatmapAttribute }> = ({ attribute }) =
 
   return (
     <Tooltip title={ tooltipTitle }>
-      <div
-        style={ {
-          width: 150,
-          minWidth: 150,
-          padding: '8px 10px',
-          borderRadius: 8,
-          background: meta.background,
-          border: `1px solid ${meta.color}`,
-          boxSizing: 'border-box'
-        } }
-      >
-        <div
-          style={ {
-            fontSize: 12,
-            lineHeight: '16px',
-            color: 'rgba(0, 0, 0, 0.65)',
-            whiteSpace: 'nowrap',
-            textOverflow: 'ellipsis',
-            overflow: 'hidden'
-          } }
-        >
+      <div className={ `${styles.tile} ${styles[STATE_TILE_CLASS[attribute.usageState]]}` }>
+        <div className={ styles.tileTitle }>
           { attribute.title }
         </div>
-        <div
-          style={ {
-            fontSize: 16,
-            fontWeight: 600,
-            color: meta.color,
-            marginTop: 2
-          } }
-        >
+        <div className={ `${styles.tileValue} ${styles[STATE_VALUE_CLASS[attribute.usageState]]}` }>
           { formatRatio(attribute.usageRatio) }
         </div>
       </div>
@@ -95,6 +89,7 @@ const HeatmapTile: React.FC<{ attribute: HeatmapAttribute }> = ({ attribute }) =
 }
 
 export const HeatmapWidget: React.FC = (): React.JSX.Element => {
+  const { styles } = useStyles()
   const [selectedClassId, setSelectedClassId] = useState<string | null>(null)
 
   const classesQuery = useAttributeHeatmapGetClassesQuery()
@@ -137,7 +132,7 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
     >
       <Header title="Attribute Heatmap" />
 
-      <div style={ { marginBottom: '1rem' } }>
+      <div className={ styles.section }>
         { classesQuery.isError && (
           <Alert
             type="error"
@@ -148,6 +143,7 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
 
         { classesQuery.data && (
           <Select
+            className={ styles.select }
             placeholder="Select a data object class"
             loading={ classesQuery.isFetching }
             options={ classesQuery.data.items.map((classItem) => ({
@@ -156,7 +152,6 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
             })) }
             value={ selectedClassId }
             onChange={ (value: unknown): void => setSelectedClassId(value === undefined ? null : String(value)) }
-            style={ { width: 320 } }
           />
         ) }
       </div>
@@ -170,7 +165,7 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
       ) }
 
       { heatmapData && summary && (
-        <Flex justify="space-between" align="center" style={ { marginBottom: '1rem' } }>
+        <Flex justify="space-between" align="center" className={ styles.section }>
           <Flex gap="small">
             <Tag color="green">{ `Used: ${summary.used}` }</Tag>
             <Tag color="orange">{ `Partially used: ${summary.partiallyUsed}` }</Tag>
@@ -179,49 +174,33 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
           </Flex>
           { loading && (
             <Progress
+              className={ styles.progressSummary }
               percent={ progress }
               status="active"
               showInfo={ false }
-              style={ { width: 120 } }
             />
           ) }
         </Flex>
       ) }
 
-      <div
-        style={ {
-          display: 'flex',
-          gap: '1rem',
-          marginBottom: '0.75rem',
-          fontSize: 12,
-          color: 'rgba(0, 0, 0, 0.45)'
-        } }
-      >
+      <div className={ styles.legend }>
         { Object.entries(STATE_META).map(([state, meta]) => (
           <Flex key={ state } gap="small" align="center">
-            <span
-              style={ {
-                display: 'inline-block',
-                width: 12,
-                height: 12,
-                borderRadius: 3,
-                background: meta.color
-              } }
-            />
+            <span className={ `${styles.legendDot} ${styles[STATE_DOT_CLASS[state as AttributeUsageState]]}` } />
             <span>{ meta.label }</span>
           </Flex>
         )) }
       </div>
 
       { loading && !heatmapData && (
-        <Flex vertical justify="center" align="center" gap="small" style={ { padding: '3rem 0' } }>
+        <Flex vertical justify="center" align="center" gap="small" className={ styles.section }>
           <Progress
+            className={ styles.progressLarge }
             percent={ progress }
             status="active"
             showInfo
-            style={ { width: 360, maxWidth: '100%' } }
           />
-          <span style={ { fontSize: 13, color: 'rgba(0, 0, 0, 0.45)' } }>
+          <span className={ styles.phaseCaption }>
             { PHASE_LABELS[heatmapStream.phase] }
           </span>
         </Flex>
@@ -232,13 +211,13 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
       ) }
 
       { groups.map(([group, attributes]) => (
-        <div key={ group } style={ { marginBottom: '1rem' } }>
+        <div key={ group } className={ styles.group }>
           <Header title={ group }>
-            <span style={ { fontSize: 12, color: 'rgba(0, 0, 0, 0.45)' } }>
+            <span className={ styles.groupCount }>
               { `${attributes.length} attributes` }
             </span>
           </Header>
-          <div style={ { display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.5rem' } }>
+          <div className={ styles.tiles }>
             { attributes.map((attribute) => (
               <HeatmapTile key={ attribute.name } attribute={ attribute } />
             )) }
