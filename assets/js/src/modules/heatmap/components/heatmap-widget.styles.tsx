@@ -18,19 +18,6 @@ export const useStyles = createStyles(({ token, css }) => ({
     font-size: ${token.fontSizeSM}px;
     color: ${token.colorTextTertiary};
   `,
-  legend: css`
-    display: flex;
-    gap: ${token.margin}px;
-    margin-bottom: ${token.marginSM}px;
-    font-size: ${token.fontSizeSM}px;
-    color: ${token.colorTextTertiary};
-  `,
-  legendDot: css`
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: ${token.borderRadiusSM}px;
-  `,
   group: css`
     margin-bottom: ${token.margin}px;
   `,
@@ -108,17 +95,5 @@ export const useStyles = createStyles(({ token, css }) => ({
   `,
   valueNotAnalyzable: css`
     color: ${token.colorTextTertiary};
-  `,
-  dotUsed: css`
-    background: ${token.colorSuccess};
-  `,
-  dotPartiallyUsed: css`
-    background: ${token.colorWarning};
-  `,
-  dotUnused: css`
-    background: ${token.colorError};
-  `,
-  dotNotAnalyzable: css`
-    background: ${token.colorTextTertiary};
   `
 }))
