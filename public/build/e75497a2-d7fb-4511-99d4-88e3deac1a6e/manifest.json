@@ -1,0 +1,37 @@
+{
+  "allFiles": [
+    "/bundles/pimcoreattributeheatmap/build/e75497a2-d7fb-4511-99d4-88e3deac1a6e/static/js/main.05ab8bef08.js",
+    "/bundles/pimcoreattributeheatmap/build/e75497a2-d7fb-4511-99d4-88e3deac1a6e/static/js/0.e86969c9da.js",
+    "/bundles/pimcoreattributeheatmap/build/e75497a2-d7fb-4511-99d4-88e3deac1a6e/static/js/remoteEntry.js",
+    "/bundles/pimcoreattributeheatmap/build/e75497a2-d7fb-4511-99d4-88e3deac1a6e/static/js/async/__federation_expose_default_export.92efe1210d.js",
+    "/bundles/pimcoreattributeheatmap/build/e75497a2-d7fb-4511-99d4-88e3deac1a6e/mf-stats.json",
+    "/bundles/pimcoreattributeheatmap/build/e75497a2-d7fb-4511-99d4-88e3deac1a6e/mf-manifest.json",
+    "/bundles/pimcoreattributeheatmap/build/e75497a2-d7fb-4511-99d4-88e3deac1a6e/main.html"
+  ],
+  "entries": {
+    "main": {
+      "html": [
+        "/bundles/pimcoreattributeheatmap/build/e75497a2-d7fb-4511-99d4-88e3deac1a6e/main.html"
+      ],
+      "initial": {
+        "js": [
+          "/bundles/pimcoreattributeheatmap/build/e75497a2-d7fb-4511-99d4-88e3deac1a6e/static/js/0.e86969c9da.js",
+          "/bundles/pimcoreattributeheatmap/build/e75497a2-d7fb-4511-99d4-88e3deac1a6e/static/js/main.05ab8bef08.js"
+        ]
+      }
+    },
+    "attribute_heatmap_bundle": {
+      "initial": {
+        "js": [
+          "/bundles/pimcoreattributeheatmap/build/e75497a2-d7fb-4511-99d4-88e3deac1a6e/static/js/remoteEntry.js"
+        ]
+      },
+      "async": {
+        "js": [
+          "/bundles/pimcoreattributeheatmap/build/e75497a2-d7fb-4511-99d4-88e3deac1a6e/static/js/async/__federation_expose_default_export.92efe1210d.js"
+        ]
+      }
+    }
+  },
+  "integrity": {}
+}
