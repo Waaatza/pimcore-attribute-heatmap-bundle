@@ -8,7 +8,7 @@ namespace Watza\AttributeHeatmapBundle\Util\Constant;
  */
 final class PermissionConstants
 {
-    public const string DATA_OBJECTS = 'objects';
+    public const DATA_OBJECTS = 'objects';
 
-    public const string ATTRIBUTE_HEATMAP = 'attributeHeatmap';
+    public const ATTRIBUTE_HEATMAP = 'attributeHeatmap';
 }

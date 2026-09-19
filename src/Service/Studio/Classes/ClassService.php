@@ -6,8 +6,8 @@ namespace Watza\AttributeHeatmapBundle\Service\Studio\Classes;
 use Watza\AttributeHeatmapBundle\Event\Studio\PreResponse\ClassListEvent;
 use Watza\AttributeHeatmapBundle\Hydrator\Studio\Heatmap\HeatmapHydratorInterface;
 use Watza\AttributeHeatmapBundle\Schema\Heatmap\ClassItemCollection;
-use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\ClassDefinitionResolverInterface;
 use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\DataObjectResolverInterface;
+use Pimcore\Bundle\StudioBackendBundle\Exception\Api\EnvironmentException;
 use Pimcore\Model\DataObject\ClassDefinition;
 use Throwable;
 use function count;
@@ -15,7 +15,6 @@ use function count;
 final readonly class ClassService implements ClassServiceInterface
 {
     public function __construct(
-        private ClassDefinitionResolverInterface $classDefinitionResolver,
         private DataObjectResolverInterface $dataObjectResolver,
         private HeatmapHydratorInterface $hydrator,
         private \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher,
@@ -59,7 +58,7 @@ final readonly class ClassService implements ClassServiceInterface
 
             return $listing->load();
         } catch (Throwable) {
-            return [];
+            throw new EnvironmentException('Could not load data object classes.');
         }
     }
 

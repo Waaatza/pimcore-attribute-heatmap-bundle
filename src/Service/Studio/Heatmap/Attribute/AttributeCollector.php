@@ -16,6 +16,7 @@ use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\ClassificationStore\Ke
 use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\ClassificationStore\ServiceResolverInterface;
 use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\FieldCollection\DefinitionResolverInterface as FieldCollectionDefinitionResolverInterface;
 use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\Objectbrick\DefinitionResolverInterface as ObjectbrickDefinitionResolverInterface;
+use Pimcore\Bundle\StudioBackendBundle\Exception\Api\EnvironmentException;
 use Pimcore\Model\DataObject\Classificationstore\GroupConfig;
 use Pimcore\Model\DataObject\Classificationstore\GroupConfig\Listing as GroupConfigListing;
 use Pimcore\Model\DataObject\Classificationstore\KeyGroupRelation;
@@ -32,7 +33,7 @@ use Throwable;
 
 final readonly class AttributeCollector implements AttributeCollectorInterface
 {
-    private const array NOT_ANALYZABLE_FIELD_TYPES = [
+    private const NOT_ANALYZABLE_FIELD_TYPES = [
         'password',
         'reverseObjectRelation',
     ];
@@ -338,7 +339,7 @@ final readonly class AttributeCollector implements AttributeCollectorInterface
 
             return $listing->load();
         } catch (Throwable) {
-            return [];
+            throw new EnvironmentException('Could not load classification store groups.');
         }
     }
 
@@ -353,7 +354,7 @@ final readonly class AttributeCollector implements AttributeCollectorInterface
 
             return $listing->load();
         } catch (Throwable) {
-            return [];
+            throw new EnvironmentException('Could not load classification store key relations.');
         }
     }
 }

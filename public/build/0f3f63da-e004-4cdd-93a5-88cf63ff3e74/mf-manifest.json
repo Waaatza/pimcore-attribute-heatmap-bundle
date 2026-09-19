@@ -21,7 +21,7 @@
     },
     "globalName": "attribute_heatmap_bundle",
     "pluginVersion": "2.9.0",
-    "publicPath": "/bundles/pimcoreattributeheatmap/build/1747145c-fe1b-4f4e-855d-2037a175b5e5/"
+    "publicPath": "/bundles/pimcoreattributeheatmap/build/0f3f63da-e004-4cdd-93a5-88cf63ff3e74/"
   },
   "shared": [
     {
@@ -95,7 +95,7 @@
         "js": {
           "sync": [
             "static/js/async/m.a71d1ad71b.js",
-            "static/js/async/__federation_expose_default_export.3c0ed1ea66.js"
+            "static/js/async/__federation_expose_default_export.922ae79382.js"
           ],
           "async": []
         },

@@ -10,5 +10,5 @@ use Pimcore\Bundle\StudioBackendBundle\Controller\AbstractApiController;
  */
 final class Prefix
 {
-    public const string BUNDLE = AbstractApiController::PREFIX . '/bundle/attribute-heatmap';
+    public const BUNDLE = AbstractApiController::PREFIX . '/bundle/attribute-heatmap';
 }

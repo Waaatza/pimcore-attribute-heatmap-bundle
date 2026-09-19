@@ -1,2 +1,25 @@
 attribute-heatmap.navigation.title: Attribute Heatmap
 perspective-editor.form.main-nav-permission.dataManagement.attributeHeatmap: Data Management > Attribute Heatmap
+attribute-heatmap.phase.collect: Collecting attributes…
+attribute-heatmap.phase.count: Counting objects…
+attribute-heatmap.phase.objects: Analysing object values…
+attribute-heatmap.phase.hydrate: Preparing result…
+attribute-heatmap.phase.done: Done
+attribute-heatmap.state.used: Used
+attribute-heatmap.state.partially-used: Partially used
+attribute-heatmap.state.unused: Unused
+attribute-heatmap.state.not-analyzable: Not analyzable
+attribute-heatmap.type: 'Type: {{type}}'
+attribute-heatmap.usage: 'Used: {{used}} of {{total}} objects'
+attribute-heatmap.class-list.error: The list of data object classes could not be loaded.
+attribute-heatmap.class-select.placeholder: Select a data object class
+attribute-heatmap.class-select.option: '{{name}} ({{count}} objects)'
+attribute-heatmap.summary.used: 'Used: {{count}}'
+attribute-heatmap.summary.partially-used: 'Partially used: {{count}}'
+attribute-heatmap.summary.unused: 'Unused: {{count}}'
+attribute-heatmap.summary.not-analyzable: 'Not analyzable: {{count}}'
+attribute-heatmap.empty: No attributes found for this class.
+attribute-heatmap.group-count_one: '{{count}} attribute'
+attribute-heatmap.group-count_other: '{{count}} attributes'
+attribute-heatmap.stream.start-error: 'The analysis could not be started (HTTP {{status}}).'
+attribute-heatmap.stream.unexpected-error: Unexpected error while analyzing.

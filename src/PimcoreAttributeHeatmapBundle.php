@@ -5,7 +5,10 @@ namespace Watza\AttributeHeatmapBundle;
 
 use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
 
-class PimcoreAttributeHeatmapBundle extends AbstractPimcoreBundle
+/**
+ * @internal
+ */
+final class PimcoreAttributeHeatmapBundle extends AbstractPimcoreBundle
 {
     public function getPath(): string
     {

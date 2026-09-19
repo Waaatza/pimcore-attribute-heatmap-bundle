@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Watza\AttributeHeatmapBundle\Controller\Studio\Heatmap;
 
 use OpenApi\Attributes\Get;
+use Psr\Log\LoggerInterface;
 use Watza\AttributeHeatmapBundle\OpenApi\Attribute\Parameter\Path\ClassIdParameter;
 use Watza\AttributeHeatmapBundle\OpenApi\Config\Prefix;
 use Watza\AttributeHeatmapBundle\OpenApi\Config\Tags;
@@ -25,11 +26,12 @@ use Throwable;
  */
 final class AnalyzeStreamController extends AbstractApiController
 {
-    private const string ROUTE = Prefix::BUNDLE . '/classes/{classId}/heatmap/stream';
+    private const ROUTE = Prefix::BUNDLE . '/classes/{classId}/heatmap/stream';
 
     public function __construct(
         SerializerInterface $serializer,
         private readonly HeatmapServiceInterface $heatmapService,
+        private readonly LoggerInterface $logger,
     ) {
         parent::__construct($serializer);
     }
@@ -77,8 +79,12 @@ final class AnalyzeStreamController extends AbstractApiController
                         ])
                     );
                 } catch (Throwable $exception) {
+                    $this->logger->error('Attribute heatmap stream failed.', [
+                        'classId' => $classId,
+                        'exception' => $exception,
+                    ]);
                     $this->writeSseEvent('error', json_encode(
-                        ['message' => $exception->getMessage()],
+                        ['message' => 'The attribute heatmap analysis failed.'],
                         JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
                     ));
                 }

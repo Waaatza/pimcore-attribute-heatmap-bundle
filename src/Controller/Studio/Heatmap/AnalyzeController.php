@@ -24,7 +24,7 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 final class AnalyzeController extends AbstractApiController
 {
-    private const string ROUTE = Prefix::BUNDLE . '/classes/{classId}/heatmap';
+    private const ROUTE = Prefix::BUNDLE . '/classes/{classId}/heatmap';
 
     public function __construct(
         SerializerInterface $serializer,

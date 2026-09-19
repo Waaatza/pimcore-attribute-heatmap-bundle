@@ -9,6 +9,7 @@ import {
   Tag,
   Tooltip
 } from '@pimcore/studio-ui-bundle/components'
+import { useTranslation } from '@pimcore/studio-ui-bundle/app'
 import {
   useAttributeHeatmapGetClassesQuery,
   type AttributeUsageState,
@@ -19,11 +20,11 @@ import { useStyles } from './heatmap-widget.styles'
 
 const PHASE_LABELS: Record<HeatmapPhase, string> = {
   idle: '',
-  collect: 'Collecting attributes…',
-  count: 'Counting objects…',
-  objects: 'Analysing object values…',
-  hydrate: 'Preparing result…',
-  done: 'Done'
+  collect: 'attribute-heatmap.phase.collect',
+  count: 'attribute-heatmap.phase.count',
+  objects: 'attribute-heatmap.phase.objects',
+  hydrate: 'attribute-heatmap.phase.hydrate',
+  done: 'attribute-heatmap.phase.done'
 }
 
 interface StateMeta {
@@ -31,10 +32,10 @@ interface StateMeta {
 }
 
 const STATE_META: Record<AttributeUsageState, StateMeta> = {
-  used: { label: 'Used' },
-  partiallyUsed: { label: 'Partially used' },
-  unused: { label: 'Unused' },
-  notAnalyzable: { label: 'Not analyzable' }
+  used: { label: 'attribute-heatmap.state.used' },
+  partiallyUsed: { label: 'attribute-heatmap.state.partially-used' },
+  unused: { label: 'attribute-heatmap.state.unused' },
+  notAnalyzable: { label: 'attribute-heatmap.state.not-analyzable' }
 }
 
 const formatRatio = (ratio: number | null): string => {
@@ -68,10 +69,14 @@ const STATE_DOT_CLASS: Record<AttributeUsageState, keyof ReturnType<typeof useSt
 
 const HeatmapTile: React.FC<{ attribute: HeatmapAttribute }> = ({ attribute }) => {
   const { styles } = useStyles()
+  const { t } = useTranslation()
   const tooltipTitle = [
     attribute.name,
-    `Type: ${attribute.fieldType}`,
-    `Used: ${attribute.usedCount ?? 'n/a'} of ${attribute.totalCount} objects`
+    t('attribute-heatmap.type', { type: attribute.fieldType }),
+    t('attribute-heatmap.usage', {
+      used: attribute.usedCount ?? 'n/a',
+      total: attribute.totalCount
+    })
   ].join('\n')
 
   return (
@@ -95,6 +100,7 @@ const HeatmapTile: React.FC<{ attribute: HeatmapAttribute }> = ({ attribute }) =
 
 export const HeatmapWidget: React.FC = (): React.JSX.Element => {
   const { styles } = useStyles()
+  const { t } = useTranslation()
   const [selectedClassId, setSelectedClassId] = useState<string | null>(null)
 
   const classesQuery = useAttributeHeatmapGetClassesQuery()
@@ -142,17 +148,20 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
           <Alert
             type="error"
             showIcon
-            message="The list of data object classes could not be loaded."
+            message={ t('attribute-heatmap.class-list.error') }
           />
         ) }
 
         { classesQuery.data && (
           <Select
             className={ styles.select }
-            placeholder="Select a data object class"
+            placeholder={ t('attribute-heatmap.class-select.placeholder') }
             loading={ classesQuery.isFetching }
             options={ classesQuery.data.items.map((classItem) => ({
-              label: `${classItem.name} (${classItem.objectCount} objects)`,
+              label: t('attribute-heatmap.class-select.option', {
+                name: classItem.name,
+                count: classItem.objectCount
+              }),
               value: classItem.id
             })) }
             value={ selectedClassId }
@@ -172,10 +181,14 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
       { heatmapData && summary && (
         <Flex justify="space-between" align="center" className={ styles.section }>
           <Flex gap="small">
-            <Tag color="green">{ `Used: ${summary.used}` }</Tag>
-            <Tag color="orange">{ `Partially used: ${summary.partiallyUsed}` }</Tag>
-            <Tag color="red">{ `Unused: ${summary.unused}` }</Tag>
-            <Tag>{ `Not analyzable: ${summary.notAnalyzable}` }</Tag>
+            <Tag color="green">{ t('attribute-heatmap.summary.used', { count: summary.used }) }</Tag>
+            <Tag color="orange">
+              { t('attribute-heatmap.summary.partially-used', { count: summary.partiallyUsed }) }
+            </Tag>
+            <Tag color="red">{ t('attribute-heatmap.summary.unused', { count: summary.unused }) }</Tag>
+            <Tag>
+              { t('attribute-heatmap.summary.not-analyzable', { count: summary.notAnalyzable }) }
+            </Tag>
           </Flex>
           { loading && (
             <Progress
@@ -192,7 +205,7 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
         { Object.entries(STATE_META).map(([state, meta]) => (
           <Flex key={ state } gap="small" align="center">
             <span className={ `${styles.legendDot} ${styles[STATE_DOT_CLASS[state as AttributeUsageState]]}` } />
-            <span>{ meta.label }</span>
+            <span>{ t(meta.label) }</span>
           </Flex>
         )) }
       </div>
@@ -206,20 +219,20 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
             showInfo
           />
           <span className={ styles.phaseCaption }>
-            { PHASE_LABELS[heatmapStream.phase] }
+            { t(PHASE_LABELS[heatmapStream.phase]) }
           </span>
         </Flex>
       ) }
 
       { heatmapData && groups.length === 0 && (
-        <Alert type="info" showIcon message="No attributes found for this class." />
+        <Alert type="info" showIcon message={ t('attribute-heatmap.empty') } />
       ) }
 
       { groups.map(([group, attributes]) => (
         <div key={ group } className={ styles.group }>
           <Header title={ group }>
             <span className={ styles.groupCount }>
-              { `${attributes.length} attributes` }
+              { t('attribute-heatmap.group-count', { count: attributes.length }) }
             </span>
           </Header>
           <div className={ styles.tiles }>
