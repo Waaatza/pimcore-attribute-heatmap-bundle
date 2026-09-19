@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\Hydrator\Studio\Heatmap;
+namespace Watza\AttributeHeatmapBundle\Hydrator\Studio\Heatmap;
 
-use Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap\AttributeHeatmapResult;
-use Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap\ClassListItem;
-use Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap\HeatmapAttribute;
-use Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap\HeatmapClassInfo;
-use Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap\HeatmapUsageSummary;
-use Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Model\AttributeDescriptor;
-use Pimcore\Bundle\AttributeHeatmapBundle\Util\Constant\AttributeUsageState;
+use Watza\AttributeHeatmapBundle\Schema\Heatmap\AttributeHeatmapResult;
+use Watza\AttributeHeatmapBundle\Schema\Heatmap\ClassListItem;
+use Watza\AttributeHeatmapBundle\Schema\Heatmap\HeatmapAttribute;
+use Watza\AttributeHeatmapBundle\Schema\Heatmap\HeatmapClassInfo;
+use Watza\AttributeHeatmapBundle\Schema\Heatmap\HeatmapUsageSummary;
+use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Model\AttributeDescriptor;
+use Watza\AttributeHeatmapBundle\Util\Constant\AttributeUsageState;
 
 final readonly class HeatmapHydrator implements HeatmapHydratorInterface
 {

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\Webpack;
+namespace Watza\AttributeHeatmapBundle\Webpack;
 
 use Pimcore\Bundle\StudioUiBundle\Webpack\WebpackEntryPointProviderInterface;
 

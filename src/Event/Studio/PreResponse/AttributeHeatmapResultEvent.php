@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\Event\Studio\PreResponse;
+namespace Watza\AttributeHeatmapBundle\Event\Studio\PreResponse;
 
-use Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap\AttributeHeatmapResult;
+use Watza\AttributeHeatmapBundle\Schema\Heatmap\AttributeHeatmapResult;
 use Pimcore\Bundle\StudioBackendBundle\Event\AbstractPreResponseEvent;
 
 /**

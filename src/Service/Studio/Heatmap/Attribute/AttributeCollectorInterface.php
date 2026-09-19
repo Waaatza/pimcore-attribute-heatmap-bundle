@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Attribute;
+namespace Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Attribute;
 
-use Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Model\AttributeDescriptor;
+use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Model\AttributeDescriptor;
 use Pimcore\Model\DataObject\ClassDefinition;
 
 interface AttributeCollectorInterface

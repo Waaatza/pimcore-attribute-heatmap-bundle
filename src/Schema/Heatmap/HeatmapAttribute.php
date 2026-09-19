@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap;
+namespace Watza\AttributeHeatmapBundle\Schema\Heatmap;
 
 use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Schema;
-use Pimcore\Bundle\AttributeHeatmapBundle\Util\Constant\AttributeUsageState;
+use Watza\AttributeHeatmapBundle\Util\Constant\AttributeUsageState;
 
 #[Schema(
     title: 'Bundle Attribute Heatmap Attribute',

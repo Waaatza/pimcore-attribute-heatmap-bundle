@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Attribute;
+namespace Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Attribute;
 
-use Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Model\AttributeDescriptor;
-use Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Value\BlockValueProvider;
-use Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Value\ClassificationstoreValueProvider;
-use Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Value\DirectValueProvider;
-use Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Value\FieldCollectionValueProvider;
-use Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Value\ObjectbrickValueProvider;
-use Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Value\ValueProviderInterface;
+use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Model\AttributeDescriptor;
+use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Value\BlockValueProvider;
+use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Value\ClassificationstoreValueProvider;
+use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Value\DirectValueProvider;
+use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Value\FieldCollectionValueProvider;
+use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Value\ObjectbrickValueProvider;
+use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Value\ValueProviderInterface;
 use Pimcore\Bundle\StaticResolverBundle\Lib\ToolResolverInterface;
 use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\ClassificationStore\GroupConfigResolverInterface;
 use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\ClassificationStore\KeyConfigResolverInterface;

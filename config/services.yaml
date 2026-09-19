@@ -4,7 +4,7 @@ services:
         autoconfigure: true
         public: false
 
-    Pimcore\Bundle\AttributeHeatmapBundle\:
+    Watza\AttributeHeatmapBundle\:
         resource: '%pimcore_attribute_heatmap.bundle_path%/src/{Controller,EventSubscriber,Service,Hydrator}'
         exclude:
             - '%pimcore_attribute_heatmap.bundle_path%/src/EventSubscriber'
@@ -13,21 +13,21 @@ services:
         tags:
             - { name: controller.service_arguments }
 
-    Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Classes\ClassServiceInterface:
-        '@Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Classes\ClassService'
-    Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\HeatmapServiceInterface:
-        '@Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\HeatmapService'
-    Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Attribute\AttributeCollectorInterface:
-        '@Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Attribute\AttributeCollector'
-    Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage\FieldUsageResolverInterface:
-        '@Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage\FieldUsageResolver'
-    Pimcore\Bundle\AttributeHeatmapBundle\Hydrator\Studio\Heatmap\HeatmapHydratorInterface:
-        '@Pimcore\Bundle\AttributeHeatmapBundle\Hydrator\Studio\Heatmap\HeatmapHydrator'
+    Watza\AttributeHeatmapBundle\Service\Studio\Classes\ClassServiceInterface:
+        '@Watza\AttributeHeatmapBundle\Service\Studio\Classes\ClassService'
+    Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\HeatmapServiceInterface:
+        '@Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\HeatmapService'
+    Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Attribute\AttributeCollectorInterface:
+        '@Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Attribute\AttributeCollector'
+    Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage\FieldUsageResolverInterface:
+        '@Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage\FieldUsageResolver'
+    Watza\AttributeHeatmapBundle\Hydrator\Studio\Heatmap\HeatmapHydratorInterface:
+        '@Watza\AttributeHeatmapBundle\Hydrator\Studio\Heatmap\HeatmapHydrator'
 
-    Pimcore\Bundle\AttributeHeatmapBundle\EventSubscriber\StudioContextPermissionsSubscriber:
+    Watza\AttributeHeatmapBundle\EventSubscriber\StudioContextPermissionsSubscriber:
         tags:
             - { name: kernel.event_subscriber }
 
-    Pimcore\Bundle\AttributeHeatmapBundle\Webpack\WebpackEntryPointProvider:
+    Watza\AttributeHeatmapBundle\Webpack\WebpackEntryPointProvider:
         tags:
             - { name: pimcore_studio_ui.webpack_entry_point_provider }

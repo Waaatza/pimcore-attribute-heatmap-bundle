@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Value;
+namespace Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Value;
 
 use Pimcore\Model\DataObject\Concrete;
 use Pimcore\Model\DataObject\Fieldcollection;

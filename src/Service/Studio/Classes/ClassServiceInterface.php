@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Classes;
+namespace Watza\AttributeHeatmapBundle\Service\Studio\Classes;
 
-use Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap\ClassItemCollection;
+use Watza\AttributeHeatmapBundle\Schema\Heatmap\ClassItemCollection;
 
 interface ClassServiceInterface
 {

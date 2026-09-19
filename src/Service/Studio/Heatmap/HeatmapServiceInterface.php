@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap;
+namespace Watza\AttributeHeatmapBundle\Service\Studio\Heatmap;
 
-use Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap\AttributeHeatmapResult;
+use Watza\AttributeHeatmapBundle\Schema\Heatmap\AttributeHeatmapResult;
 
 interface HeatmapServiceInterface
 {

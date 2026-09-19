@@ -23,14 +23,14 @@
   },
   "autoload": {
     "psr-4": {
-      "Pimcore\\Bundle\\AttributeHeatmapBundle\\": "src/"
+      "Watza\\AttributeHeatmapBundle\\": "src/"
     }
   },
   "extra": {
     "pimcore": {
       "compatible-php-versions": "^8.2",
       "bundles": [
-        "Pimcore\\Bundle\\AttributeHeatmapBundle\\PimcoreAttributeHeatmapBundle"
+        "Watza\\AttributeHeatmapBundle\\PimcoreAttributeHeatmapBundle"
       ]
     }
   }

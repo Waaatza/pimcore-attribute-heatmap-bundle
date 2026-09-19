@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap;
+namespace Watza\AttributeHeatmapBundle\Service\Studio\Heatmap;
 
-use Pimcore\Bundle\AttributeHeatmapBundle\Event\Studio\PreResponse\AttributeHeatmapResultEvent;
-use Pimcore\Bundle\AttributeHeatmapBundle\Hydrator\Studio\Heatmap\HeatmapHydratorInterface;
-use Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap\AttributeHeatmapResult;
-use Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Attribute\AttributeCollectorInterface;
-use Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Model\AttributeDescriptor;
-use Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage\FieldUsageResolverInterface;
+use Watza\AttributeHeatmapBundle\Event\Studio\PreResponse\AttributeHeatmapResultEvent;
+use Watza\AttributeHeatmapBundle\Hydrator\Studio\Heatmap\HeatmapHydratorInterface;
+use Watza\AttributeHeatmapBundle\Schema\Heatmap\AttributeHeatmapResult;
+use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Attribute\AttributeCollectorInterface;
+use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Model\AttributeDescriptor;
+use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Usage\FieldUsageResolverInterface;
 use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\ClassDefinitionResolverInterface;
 use Pimcore\Bundle\StaticResolverBundle\Models\DataObject\DataObjectResolverInterface;
 use Pimcore\Bundle\StudioBackendBundle\Exception\Api\NotFoundException;

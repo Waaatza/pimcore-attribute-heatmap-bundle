@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Pimcore\Bundle\AttributeHeatmapBundle\Controller\Studio\Heatmap;
+namespace Watza\AttributeHeatmapBundle\Controller\Studio\Heatmap;
 
 use OpenApi\Attributes\Get;
 use OpenApi\Attributes\JsonContent;
-use Pimcore\Bundle\AttributeHeatmapBundle\OpenApi\Config\Prefix;
-use Pimcore\Bundle\AttributeHeatmapBundle\OpenApi\Config\Tags;
-use Pimcore\Bundle\AttributeHeatmapBundle\Schema\Heatmap\ClassItemCollection;
-use Pimcore\Bundle\AttributeHeatmapBundle\Service\Studio\Classes\ClassServiceInterface;
-use Pimcore\Bundle\AttributeHeatmapBundle\Util\Constant\PermissionConstants;
+use Watza\AttributeHeatmapBundle\OpenApi\Config\Prefix;
+use Watza\AttributeHeatmapBundle\OpenApi\Config\Tags;
+use Watza\AttributeHeatmapBundle\Schema\Heatmap\ClassItemCollection;
+use Watza\AttributeHeatmapBundle\Service\Studio\Classes\ClassServiceInterface;
+use Watza\AttributeHeatmapBundle\Util\Constant\PermissionConstants;
 use Pimcore\Bundle\StudioBackendBundle\Controller\AbstractApiController;
 use Pimcore\Bundle\StudioBackendBundle\OpenApi\Attribute\Response\DefaultResponses;
 use Pimcore\Bundle\StudioBackendBundle\OpenApi\Attribute\Response\SuccessResponse;
