@@ -15,8 +15,6 @@ final class PimcoreAttributeHeatmapExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $container->setParameter('pimcore_attribute_heatmap.bundle_path', \dirname(__DIR__, 2));
-
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loader->load('services.yaml');
     }

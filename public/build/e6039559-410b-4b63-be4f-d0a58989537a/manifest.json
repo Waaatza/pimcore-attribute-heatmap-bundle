@@ -1,0 +1,39 @@
+{
+  "allFiles": [
+    "/bundles/pimcoreattributeheatmap/build/e6039559-410b-4b63-be4f-d0a58989537a/static/js/main.0b1cbdc251.js",
+    "/bundles/pimcoreattributeheatmap/build/e6039559-410b-4b63-be4f-d0a58989537a/static/js/async/m.5d5719a45c.js",
+    "/bundles/pimcoreattributeheatmap/build/e6039559-410b-4b63-be4f-d0a58989537a/static/js/remoteEntry.js",
+    "/bundles/pimcoreattributeheatmap/build/e6039559-410b-4b63-be4f-d0a58989537a/static/js/d.fce010332f.js",
+    "/bundles/pimcoreattributeheatmap/build/e6039559-410b-4b63-be4f-d0a58989537a/static/js/async/__federation_expose_default_export.56a9a57167.js",
+    "/bundles/pimcoreattributeheatmap/build/e6039559-410b-4b63-be4f-d0a58989537a/mf-stats.json",
+    "/bundles/pimcoreattributeheatmap/build/e6039559-410b-4b63-be4f-d0a58989537a/mf-manifest.json",
+    "/bundles/pimcoreattributeheatmap/build/e6039559-410b-4b63-be4f-d0a58989537a/main.html"
+  ],
+  "entries": {
+    "main": {
+      "html": [
+        "/bundles/pimcoreattributeheatmap/build/e6039559-410b-4b63-be4f-d0a58989537a/main.html"
+      ],
+      "initial": {
+        "js": [
+          "/bundles/pimcoreattributeheatmap/build/e6039559-410b-4b63-be4f-d0a58989537a/static/js/d.fce010332f.js",
+          "/bundles/pimcoreattributeheatmap/build/e6039559-410b-4b63-be4f-d0a58989537a/static/js/main.0b1cbdc251.js"
+        ]
+      }
+    },
+    "attribute_heatmap_bundle": {
+      "initial": {
+        "js": [
+          "/bundles/pimcoreattributeheatmap/build/e6039559-410b-4b63-be4f-d0a58989537a/static/js/remoteEntry.js"
+        ]
+      },
+      "async": {
+        "js": [
+          "/bundles/pimcoreattributeheatmap/build/e6039559-410b-4b63-be4f-d0a58989537a/static/js/async/m.5d5719a45c.js",
+          "/bundles/pimcoreattributeheatmap/build/e6039559-410b-4b63-be4f-d0a58989537a/static/js/async/__federation_expose_default_export.56a9a57167.js"
+        ]
+      }
+    }
+  },
+  "integrity": {}
+}
