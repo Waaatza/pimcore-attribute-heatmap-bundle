@@ -22,6 +22,7 @@ use Pimcore\Model\DataObject\Classificationstore\KeyGroupRelation;
 use Pimcore\Model\DataObject\Classificationstore\KeyGroupRelation\Listing as KeyGroupRelationListing;
 use Pimcore\Model\DataObject\ClassDefinition;
 use Pimcore\Model\DataObject\ClassDefinition\Data;
+use Pimcore\Model\DataObject\ClassDefinition\Layout;
 use Pimcore\Model\DataObject\ClassDefinition\Data\Block;
 use Pimcore\Model\DataObject\ClassDefinition\Data\Classificationstore;
 use Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections;
@@ -104,7 +105,7 @@ final readonly class AttributeCollector implements AttributeCollectorInterface
         foreach ($languages as $language) {
             $group = 'Localizedfields (' . $language . ')';
 
-            foreach ($field->getChildren() as $fieldChild) {
+            foreach ($this->resolveDataChildren($field->getChildren()) as $fieldChild) {
                 $this->addLeafDescriptor(
                     $descriptors,
                     name: $fieldChild->getName() . '_' . mb_strtolower($language),
@@ -263,7 +264,7 @@ final readonly class AttributeCollector implements AttributeCollectorInterface
     {
         $group = 'Block: ' . $field->getName();
 
-        foreach ($field->getChildren() as $blockFieldChild) {
+        foreach ($this->resolveDataChildren($field->getChildren()) as $blockFieldChild) {
             $this->addLeafDescriptor(
                 $descriptors,
                 name: $field->getName() . '_' . $blockFieldChild->getName(),
@@ -273,6 +274,33 @@ final readonly class AttributeCollector implements AttributeCollectorInterface
                 provider: new BlockValueProvider($field->getName(), $blockFieldChild->getName()),
             );
         }
+    }
+
+    /**
+     * Resolves container children into data fields, descending into nested layout
+     * elements (e.g. Fieldset) which group fields visually.
+     *
+     * @param array<int, mixed> $children
+     *
+     * @return array<int, Data>
+     */
+    private function resolveDataChildren(array $children): array
+    {
+        $resolved = [];
+
+        foreach ($children as $child) {
+            if ($child instanceof Data) {
+                $resolved[] = $child;
+
+                continue;
+            }
+
+            if ($child instanceof Layout) {
+                $resolved = [...$resolved, ...$this->resolveDataChildren($child->getChildren())];
+            }
+        }
+
+        return $resolved;
     }
 
     /**
