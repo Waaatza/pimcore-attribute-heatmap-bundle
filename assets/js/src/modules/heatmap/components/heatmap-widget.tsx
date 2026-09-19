@@ -10,11 +10,20 @@ import {
   Tooltip
 } from '@pimcore/studio-ui-bundle/components'
 import {
-  useAttributeHeatmapAnalyzeQuery,
   useAttributeHeatmapGetClassesQuery,
   type AttributeUsageState,
   type HeatmapAttribute
 } from '../api/heatmap-api'
+import { useHeatmapStream, type HeatmapPhase } from '../hooks/use-heatmap-stream'
+
+const PHASE_LABELS: Record<HeatmapPhase, string> = {
+  idle: '',
+  collect: 'Collecting attributes…',
+  count: 'Counting objects…',
+  objects: 'Analysing object values…',
+  hydrate: 'Preparing result…',
+  done: 'Done'
+}
 
 interface StateMeta {
   color: string
@@ -87,33 +96,13 @@ const HeatmapTile: React.FC<{ attribute: HeatmapAttribute }> = ({ attribute }) =
 
 export const HeatmapWidget: React.FC = (): React.JSX.Element => {
   const [selectedClassId, setSelectedClassId] = useState<string | null>(null)
-  const [progress, setProgress] = useState(0)
 
   const classesQuery = useAttributeHeatmapGetClassesQuery()
-  const heatmapQuery = useAttributeHeatmapAnalyzeQuery(
-    selectedClassId ? { classId: selectedClassId } : { classId: '' },
-    { skip: selectedClassId === null }
-  )
+  const heatmapStream = useHeatmapStream(selectedClassId)
 
-  const loading = classesQuery.isFetching || heatmapQuery.isFetching
-
-  useEffect(() => {
-    if (!loading) {
-      setProgress(0)
-
-      return
-    }
-
-    let value = 10
-    setProgress(value)
-
-    const id = setInterval(() => {
-      value = Math.min(value + Math.random() * 12, 92)
-      setProgress(value)
-    }, 350)
-
-    return () => clearInterval(id)
-  }, [loading])
+  const progress = heatmapStream.progress
+  const heatmapData = heatmapStream.data
+  const loading = classesQuery.isFetching || heatmapStream.isFetching
 
   useEffect(() => {
     if (selectedClassId === null && classesQuery.data?.items.length) {
@@ -127,8 +116,8 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
   const groups = useMemo(() => {
     const grouped = new Map<string, HeatmapAttribute[]>()
 
-    if (heatmapQuery.data) {
-      for (const attribute of heatmapQuery.data.attributes) {
+    if (heatmapData) {
+      for (const attribute of heatmapData.attributes) {
         const key = attribute.group
         const entries = grouped.get(key) ?? []
         entries.push(attribute)
@@ -137,9 +126,9 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
     }
 
     return [...grouped.entries()]
-  }, [heatmapQuery.data])
+  }, [heatmapData])
 
-  const summary = heatmapQuery.data?.usageSummary
+  const summary = heatmapData?.usageSummary
 
   return (
     <Content
@@ -172,15 +161,15 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
         ) }
       </div>
 
-      { heatmapQuery.isError && (
+      { heatmapStream.error && (
         <Alert
           type="error"
           showIcon
-          message={ `The analysis for class "${selectedClassId ?? ''}" failed.` }
+          message={ heatmapStream.error }
         />
       ) }
 
-      { heatmapQuery.data && summary && (
+      { heatmapData && summary && (
         <Flex justify="space-between" align="center" style={ { marginBottom: '1rem' } }>
           <Flex gap="small">
             <Tag color="green">{ `Used: ${summary.used}` }</Tag>
@@ -209,7 +198,7 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
         } }
       >
         { Object.entries(STATE_META).map(([state, meta]) => (
-          <Flex key={ state } gap="x-small" align="center">
+          <Flex key={ state } gap="small" align="center">
             <span
               style={ {
                 display: 'inline-block',
@@ -224,21 +213,21 @@ export const HeatmapWidget: React.FC = (): React.JSX.Element => {
         )) }
       </div>
 
-      { loading && !heatmapQuery.data && (
+      { loading && !heatmapData && (
         <Flex vertical justify="center" align="center" gap="small" style={ { padding: '3rem 0' } }>
           <Progress
             percent={ progress }
             status="active"
-            showInfo={ false }
+            showInfo
             style={ { width: 360, maxWidth: '100%' } }
           />
           <span style={ { fontSize: 13, color: 'rgba(0, 0, 0, 0.45)' } }>
-            Analysing attributes…
+            { PHASE_LABELS[heatmapStream.phase] }
           </span>
         </Flex>
       ) }
 
-      { heatmapQuery.data && groups.length === 0 && (
+      { heatmapData && groups.length === 0 && (
         <Alert type="info" showIcon message="No attributes found for this class." />
       ) }
 
