@@ -24,8 +24,8 @@ A [Pimcore Studio](https://pimcore.com/) bundle that analyzes **data object attr
 
 ## Requirements
 
-- PHP `>= 8.2`
-- Pimcore `^11.0 || ^12.0 || ^2026.1`
+- PHP `>= 8.4`
+- Pimcore `^2026.1`
 - Pimcore Studio UI `^2026.2`
 - `pimcore/studio-backend-bundle` `^2026.2`
 - `pimcore/static-resolver-bundle` `^2026.2`
