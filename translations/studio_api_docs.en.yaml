@@ -4,4 +4,7 @@ bundle_attribute_heatmap_class_list_get_success_response: List of classes with o
 bundle_attribute_heatmap_analyze_get_description: Analyzes the usage of every attribute for all objects of the given class and returns the heatmap result.
 bundle_attribute_heatmap_analyze_get_summary: Analyze attribute usage for a data object class
 bundle_attribute_heatmap_analyze_get_success_response: Attribute heatmap analysis result
+bundle_attribute_heatmap_analyze_stream_description: Streams the attribute heatmap analysis for the given class as server-sent events, including real-time progress and the final heatmap result.
+bundle_attribute_heatmap_analyze_stream_summary: Stream attribute heatmap analysis with real-time progress
+bundle_attribute_heatmap_analyze_stream_success_response: Server-sent events with analysis progress and result
 bundle_tag_attribute_heatmap_description: Attribute heatmap analysis for data object classes

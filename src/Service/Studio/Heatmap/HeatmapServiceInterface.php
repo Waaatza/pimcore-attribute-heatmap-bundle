@@ -10,7 +10,9 @@ interface HeatmapServiceInterface
     /**
      * Analyzes the usage of every attribute for the objects of the given class.
      *
+     * @param callable(int $percent, string $phase): void|null $onProgress
+     *
      * @throws \Pimcore\Bundle\StudioBackendBundle\Exception\Api\NotFoundException
      */
-    public function analyze(string $classId): AttributeHeatmapResult;
+    public function analyze(string $classId, ?callable $onProgress = null): AttributeHeatmapResult;
 }

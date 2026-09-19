@@ -51,17 +51,10 @@ const attributeHeatmapApi = api.injectEndpoints({
         url: `${getPrefix()}/bundle/attribute-heatmap/classes`,
         method: 'GET'
       })
-    }),
-    attributeHeatmapAnalyze: build.query<AttributeHeatmapResult, { classId: string }>({
-      query: (args) => ({
-        url: `${getPrefix()}/bundle/attribute-heatmap/classes/${args.classId}/heatmap`,
-        method: 'GET'
-      })
     })
   })
 })
 
 export const {
-  useAttributeHeatmapGetClassesQuery,
-  useAttributeHeatmapAnalyzeQuery
+  useAttributeHeatmapGetClassesQuery
 } = attributeHeatmapApi

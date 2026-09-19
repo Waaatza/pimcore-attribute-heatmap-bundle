@@ -32,7 +32,7 @@ final readonly class HeatmapService implements HeatmapServiceInterface
     ) {
     }
 
-    public function analyze(string $classId): AttributeHeatmapResult
+    public function analyze(string $classId, ?callable $onProgress = null): AttributeHeatmapResult
     {
         $definition = $this->classDefinitionResolver->getById($classId);
 
@@ -41,9 +41,13 @@ final readonly class HeatmapService implements HeatmapServiceInterface
         }
 
         $descriptors = $this->attributeCollector->collect($definition);
-        $totalCount = $this->countObjects($classId);
+        $this->emitProgress($onProgress, 5, 'collect');
 
-        $usedCounts = $this->collectUsageCounts($classId, $definition, $descriptors, $totalCount);
+        $totalCount = $this->countObjects($classId);
+        $this->emitProgress($onProgress, 8, 'count');
+
+        $usedCounts = $this->collectUsageCounts($classId, $definition, $descriptors, $totalCount, $onProgress);
+        $this->emitProgress($onProgress, 94, 'hydrate');
 
         $classInfo = $this->heatmapHydrator->hydrateClassInfo(
             classId: $classId,
@@ -63,7 +67,17 @@ final readonly class HeatmapService implements HeatmapServiceInterface
             AttributeHeatmapResultEvent::EVENT_NAME,
         );
 
+        $this->emitProgress($onProgress, 100, 'done');
+
         return $result;
+    }
+
+    /**
+     * @param callable(int $percent, string $phase): void|null $onProgress
+     */
+    private function emitProgress(?callable $onProgress, int $percent, string $phase): void
+    {
+        $onProgress?->__invoke($percent, $phase);
     }
 
     private function countObjects(string $classId): int
@@ -78,6 +92,7 @@ final readonly class HeatmapService implements HeatmapServiceInterface
 
     /**
      * @param array<int, AttributeDescriptor> $descriptors
+     * @param callable(int $percent, string $phase): void|null $onProgress
      *
      * @return array<int, int>
      */
@@ -86,6 +101,7 @@ final readonly class HeatmapService implements HeatmapServiceInterface
         ClassDefinition $definition,
         array $descriptors,
         int $totalCount,
+        ?callable $onProgress = null,
     ): array {
         if ($totalCount === 0) {
             return array_fill(0, count($descriptors), 0);
@@ -97,6 +113,8 @@ final readonly class HeatmapService implements HeatmapServiceInterface
         $remainingIndexes = $usageResult->getRemainingIndexes();
 
         if ($remainingIndexes === []) {
+            $this->emitProgress($onProgress, 92, 'objects');
+
             return $usedCounts;
         }
 
@@ -146,6 +164,10 @@ final readonly class HeatmapService implements HeatmapServiceInterface
                 }
 
                 $offset += self::BATCH_SIZE;
+
+                $processed = min($offset, $totalCount);
+                $percent = (int) round(12 + ($processed / $totalCount) * 80);
+                $this->emitProgress($onProgress, min($percent, 92), 'objects');
             }
         } finally {
             $this->dataObjectResolver->setGetInheritedValues($previousInheritedValues);
