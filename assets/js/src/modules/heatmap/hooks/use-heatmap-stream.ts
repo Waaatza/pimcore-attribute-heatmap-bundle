@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getPrefix } from '@pimcore/studio-ui-bundle/api'
+import { useTranslation } from '@pimcore/studio-ui-bundle/app'
 import type { AttributeHeatmapResult } from '../api/heatmap-api'
 
 export interface ProgressPayload {
@@ -37,6 +38,7 @@ const parseSseChunk = (chunk: string): { event: string; data: string } | null =>
 }
 
 export const useHeatmapStream = (classId: string | null): HeatmapStreamState => {
+  const { t } = useTranslation()
   const [progress, setProgress] = useState(0)
   const [phase, setPhase] = useState<HeatmapPhase>('idle')
   const [data, setData] = useState<AttributeHeatmapResult | null>(null)
@@ -82,7 +84,7 @@ export const useHeatmapStream = (classId: string | null): HeatmapStreamState => 
         })
 
         if (!response.ok || response.body === null) {
-          throw new Error(`The analysis could not be started (HTTP ${response.status}).`)
+          throw new Error(t('attribute-heatmap.stream.start-error', { status: response.status }))
         }
 
         const reader = response.body.getReader()
@@ -93,6 +95,7 @@ export const useHeatmapStream = (classId: string | null): HeatmapStreamState => 
           const { done, value } = await reader.read()
 
           if (done) {
+            setIsFetching(false)
             break
           }
 
@@ -122,7 +125,7 @@ export const useHeatmapStream = (classId: string | null): HeatmapStreamState => 
         }
       } catch (err) {
         if (!abortController.signal.aborted) {
-          setError(err instanceof Error ? err.message : 'Unexpected error while analyzing.')
+          setError(err instanceof Error ? err.message : t('attribute-heatmap.stream.unexpected-error'))
           setIsFetching(false)
         }
       }
@@ -131,7 +134,7 @@ export const useHeatmapStream = (classId: string | null): HeatmapStreamState => 
     void run()
 
     return () => abortController.abort()
-  }, [classId])
+  }, [classId, t])
 
   return { progress, phase, data, error, isFetching }
 }

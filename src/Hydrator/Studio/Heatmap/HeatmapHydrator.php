@@ -72,35 +72,31 @@ final readonly class HeatmapHydrator implements HeatmapHydratorInterface
     private function hydrateAttribute(AttributeDescriptor $descriptor, int $usedCount, int $totalCount): HeatmapAttribute
     {
         $analyzable = $descriptor->getAnalyzable();
-        $ratio = $analyzable && $totalCount > 0 ? round($usedCount / $totalCount, 2) : 0.0;
+        $ratio = $analyzable && $totalCount > 0 ? $usedCount / $totalCount : 0.0;
 
         return new HeatmapAttribute(
             name: $descriptor->getName(),
             title: $descriptor->getTitle(),
             fieldType: $descriptor->getFieldType(),
             group: $descriptor->getGroup(),
-            usageState: $this->resolveUsageState(risingRatio: $ratio, usedCount: $usedCount, analyzable: $analyzable),
+            usageState: $this->resolveUsageState($usedCount, $totalCount, $analyzable),
             usedCount: $analyzable ? $usedCount : null,
             totalCount: $totalCount,
-            usageRatio: $analyzable ? $ratio : null,
+            usageRatio: $analyzable ? round($ratio, 2) : null,
         );
     }
 
-    private function resolveUsageState(float $risingRatio, int $usedCount, bool $analyzable): AttributeUsageState
+    private function resolveUsageState(int $usedCount, int $totalCount, bool $analyzable): AttributeUsageState
     {
         if (!$analyzable) {
             return AttributeUsageState::NOT_ANALYZABLE;
-        }
-
-        if ($risingRatio <= 0.0) {
-            return AttributeUsageState::UNUSED;
         }
 
         if ($usedCount === 0) {
             return AttributeUsageState::UNUSED;
         }
 
-        if ($risingRatio < 1.0) {
+        if ($usedCount < $totalCount) {
             return AttributeUsageState::PARTIALLY_USED;
         }
 

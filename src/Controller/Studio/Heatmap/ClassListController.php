@@ -23,7 +23,7 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 final class ClassListController extends AbstractApiController
 {
-    private const string ROUTE = Prefix::BUNDLE . '/classes';
+    private const ROUTE = Prefix::BUNDLE . '/classes';
 
     public function __construct(
         SerializerInterface $serializer,

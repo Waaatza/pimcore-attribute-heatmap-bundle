@@ -11,7 +11,7 @@ use Pimcore\Bundle\StudioBackendBundle\Event\AbstractPreResponseEvent;
  */
 final class AttributeHeatmapResultEvent extends AbstractPreResponseEvent
 {
-    public const string EVENT_NAME = 'pre_response.attribute_heatmap.result';
+    public const EVENT_NAME = 'pre_response.attribute_heatmap.result';
 
     public function __construct(
         private readonly AttributeHeatmapResult $result,

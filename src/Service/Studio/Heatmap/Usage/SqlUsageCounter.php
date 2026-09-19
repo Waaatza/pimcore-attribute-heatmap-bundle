@@ -26,21 +26,21 @@ use Watza\AttributeHeatmapBundle\Service\Studio\Heatmap\Value\ObjectbrickValuePr
  */
 final readonly class SqlUsageCounter implements SqlUsageCounterInterface
 {
-    private const string DATA_TABLE_PREFIX = 'object_store_';
+    private const DATA_TABLE_PREFIX = 'object_store_';
 
-    private const string DATA_TABLE_LEGACY_PREFIX = 'object_';
+    private const DATA_TABLE_LEGACY_PREFIX = 'object_';
 
-    private const string LOCALIZED_TABLE_PREFIX = 'object_localized_data_';
+    private const LOCALIZED_TABLE_PREFIX = 'object_localized_data_';
 
-    private const string LOCALIZED_TABLE_LEGACY_PREFIX = 'object_localized_';
+    private const LOCALIZED_TABLE_LEGACY_PREFIX = 'object_localized_';
 
-    private const string RELATIONS_TABLE_PREFIX = 'object_relations_';
+    private const RELATIONS_TABLE_PREFIX = 'object_relations_';
 
-    private const string CLASSIFICATION_STORE_TABLE_PREFIX = 'object_classificationstore_data_';
+    private const CLASSIFICATION_STORE_TABLE_PREFIX = 'object_classificationstore_data_';
 
-    private const string BLOCK_FIELD_TYPE = 'block';
+    private const BLOCK_FIELD_TYPE = 'block';
 
-    private const array RELATION_FIELD_TYPES = [
+    private const RELATION_FIELD_TYPES = [
         'manyToManyRelation',
         'advancedManyToManyRelation',
         'manyToManyObjectRelation',
@@ -51,12 +51,12 @@ final readonly class SqlUsageCounter implements SqlUsageCounterInterface
         'advancedManyToManyDocumentRelation',
     ];
 
-    private const array CHECKBOX_FIELD_TYPES = [
+    private const CHECKBOX_FIELD_TYPES = [
         'checkbox',
         'booleanSelect',
     ];
 
-    private const array NUMERIC_FIELD_TYPES = [
+    private const NUMERIC_FIELD_TYPES = [
         'numeric',
         'slider',
         'quantityValue',

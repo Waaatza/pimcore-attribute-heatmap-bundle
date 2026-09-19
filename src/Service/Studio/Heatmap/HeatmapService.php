@@ -19,7 +19,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final readonly class HeatmapService implements HeatmapServiceInterface
 {
-    private const int BATCH_SIZE = 200;
+    private const BATCH_SIZE = 200;
 
     public function __construct(
         private ClassDefinitionResolverInterface $classDefinitionResolver,

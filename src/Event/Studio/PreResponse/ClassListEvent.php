@@ -11,7 +11,7 @@ use Pimcore\Bundle\StudioBackendBundle\Event\AbstractPreResponseEvent;
  */
 final class ClassListEvent extends AbstractPreResponseEvent
 {
-    public const string EVENT_NAME = 'pre_response.attribute_heatmap.class_list';
+    public const EVENT_NAME = 'pre_response.attribute_heatmap.class_list';
 
     public function __construct(
         private readonly ClassItemCollection $collection,
