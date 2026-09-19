@@ -3,6 +3,17 @@
   "license": "POCL",
   "type": "pimcore-bundle",
   "description": "Pimcore Studio bundle that visualizes the usage of data object attributes as a heatmap",
+  "homepage": "https://github.com/Waaatza/pimcore-attribute-heatmap-bundle",
+  "support": {
+    "source": "https://github.com/Waaatza/pimcore-attribute-heatmap-bundle"
+  },
+  "keywords": [
+    "pimcore",
+    "pimcore-studio",
+    "bundle",
+    "heatmap",
+    "data-objects"
+  ],
   "require": {
     "php": ">=8.2",
     "pimcore/pimcore": "^11.0 || ^12.0 || ^2026.1",
