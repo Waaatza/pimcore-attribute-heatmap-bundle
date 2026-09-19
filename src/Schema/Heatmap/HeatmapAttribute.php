@@ -26,12 +26,12 @@ final readonly class HeatmapAttribute
         private string $group,
         #[Property(description: 'Usage state of the attribute', type: 'string', example: 'partiallyUsed')]
         private AttributeUsageState $usageState,
-        #[Property(description: 'Number of objects holding a value', type: 'integer', example: 42)]
-        private int $usedCount,
+        #[Property(description: 'Number of objects holding a value', type: 'integer', example: 42, nullable: true)]
+        private ?int $usedCount,
         #[Property(description: 'Total number of analyzed objects', type: 'integer', example: 87)]
         private int $totalCount,
-        #[Property(description: 'Ratio of used objects to total objects', type: 'number', example: 0.48)]
-        private float $usageRatio,
+        #[Property(description: 'Ratio of used objects to total objects', type: 'number', example: 0.48, nullable: true)]
+        private ?float $usageRatio,
     ) {
     }
 
@@ -60,7 +60,7 @@ final readonly class HeatmapAttribute
         return $this->usageState;
     }
 
-    public function getUsedCount(): int
+    public function getUsedCount(): ?int
     {
         return $this->usedCount;
     }
@@ -70,7 +70,7 @@ final readonly class HeatmapAttribute
         return $this->totalCount;
     }
 
-    public function getUsageRatio(): float
+    public function getUsageRatio(): ?float
     {
         return $this->usageRatio;
     }
